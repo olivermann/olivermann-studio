@@ -1,0 +1,145 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const skills = {
+  'Strategy & Leadership': [
+    'Strategic Marketing',
+    'Strategic Communications',
+    'Event Management',
+    'Budget Planning',
+    'People Management & Mentorship',
+    'Project Management',
+    'Media Relations & PR',
+    'Community Engagement',
+    'Stakeholder Relations',
+  ],
+  'Storytelling & Content': [
+    'Copywriting',
+    'Storytelling',
+    'Videography',
+    'Photography',
+    'Podcasting',
+    'Graphic Design',
+    'Adobe Creative Cloud',
+  ],
+  'Digital & Analytics': [
+    'Email Marketing & Campaign Management',
+    'Social Media',
+    'Content Marketing',
+    'Digital Analytics & Performance Tracking',
+    'Website Management',
+    'SEO',
+    'Paid Advertising',
+  ],
+};
+---
+
+<BaseLayout
+  title="Resume · Oliver Mann"
+  description="Resume of Oliver Mann: 15 years leading marketing, communications, and events at the University of British Columbia."
+  active="resume"
+>
+<main>
+  <h1>Resume</h1>
+
+  <!-- 7.2 Experience -->
+  <section class="fade-in">
+    <h2>Experience</h2>
+
+    <div class="role">
+      <h3>Senior Manager, Marketing &amp; Events</h3>
+      <p class="org">Innovation UBC, VP Research and Innovation, UBC · Dec 2025 – Present</p>
+      <p class="pending">Role highlights coming soon.</p>
+    </div>
+
+    <div class="role">
+      <h3>Senior Communications Strategist</h3>
+      <p class="org">Office of Community Engagement, External Relations, UBC · Feb 2022 – Nov 2025</p>
+      <ul>
+        <li>Led communications strategy, elevating the office's profile and increasing awareness, participation, and diversity across programs. Drove a 53% increase in applications to the largest funding program while expanding program diversity, 78% of funded projects now represent new partnerships.</li>
+        <li>Managed all aspects of digital channels, including the website, email marketing, and social media, achieving 80% annual traffic growth, a 13% email click rate, and a twofold increase in social media engagement, including 1,200 new LinkedIn followers in one year.</li>
+        <li>Planned, organized, and executed high-profile events, including UBC Connects at Robson Square and UBC Partnering in Research, leading to 2,500+ event registrations in 2024, with participants from Canada, the U.S., and Australia.</li>
+        <li>Led multimedia storytelling, spanning written stories, video, photography, and podcasts, to highlight community-university partnerships. Published 24 stories in 2024, with 15 featured on UBC's front page, garnering over 150,000 views.</li>
+        <li>Provided strategic communications leadership, advancing knowledge sharing and capacity building at UBC Vancouver, Okanagan, and with external partners. Advised leadership and trained staff on communications strategy, reciprocal storytelling, and emerging AI trends.</li>
+      </ul>
+    </div>
+
+    <div class="role">
+      <h3>Digital Marketing Strategist</h3>
+      <p class="org">Faculty of Arts, UBC · Jun 2019 – Feb 2022</p>
+      <ul>
+        <li>Developed and executed strategic, data-driven digital marketing and brand campaigns across 25+ departments, integrating multi-channel engagement, paid advertising, and retargeting. Supported crisis communications during COVID-19.</li>
+        <li>Managed social media strategy across Instagram, Twitter, Facebook, and YouTube, producing 100+ posts weekly. Achieved a 200% quarterly engagement increase (2019 to 2020) and grew followers 30% annually; channels averaged 100K+ organic impressions per month.</li>
+        <li>Led multimedia storytelling via blogs, videos, photos, and Instagram takeovers; produced the faculty's top 2021 story, "Through Our Eyes, With Our Voices," in response to rising anti-Asian hate across North America.</li>
+        <li>Revamped data analytics for the faculty using Google Analytics and Google Data Studio, delivering monthly and quarterly reports that equipped leadership with actionable insights.</li>
+      </ul>
+    </div>
+
+    <div class="role">
+      <h3>Communications and Events Manager</h3>
+      <p class="org">Department of Asian Studies, UBC · Sep 2012 – May 2019</p>
+      <ul>
+        <li>Developed and implemented the department's strategic communications plan, managing website, email marketing, and social media content, driving measurable growth in visibility and engagement.</li>
+        <li>Managed, hired, and evaluated a communications team of three, developing guidelines and processes that improved collaboration, efficiency, and output quality across digital and print platforms.</li>
+        <li>Led event planning and promotion for high-profile lectures, conferences, and cultural celebrations, managing events with 150 to 500 attendees.</li>
+        <li>Produced feature stories, interviews, videos, and press releases highlighting faculty research and student experiences.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 7.3 Education -->
+  <section class="fade-in">
+    <h2>Education</h2>
+    <div class="edu">
+      <h3>Master of Arts, Professional Communication</h3>
+      <p class="where">Royal Roads University, Victoria, BC · Sep 2022 – Aug 2024</p>
+      <p>Published research: frameworks for ethical, equity-driven storytelling in institutional communications, advocating for Indigenous-led storytelling and decolonizing communication practices. Areas of study: Organizational Communications, Political Communications, Conflict Analysis &amp; Management, Communications Theory, Research Methodology.</p>
+    </div>
+    <div class="edu">
+      <h3>Digital Content and Communications Certificate</h3>
+      <p class="where">University of British Columbia, Vancouver, BC · 2016 – 2017</p>
+    </div>
+    <div class="edu">
+      <h3>Bachelor of Arts, Asian Studies &amp; Economics</h3>
+      <p class="where">University of British Columbia, Vancouver, BC</p>
+    </div>
+  </section>
+
+  <!-- 7.4 Skills -->
+  <section class="fade-in">
+    <h2>Skills</h2>
+    {Object.entries(skills).map(([group, list]) => (
+      <div class="skill-group">
+        <h3>{group}</h3>
+        <div class="pills">
+          {list.map((s) => <span>{s}</span>)}
+        </div>
+      </div>
+    ))}
+  </section>
+</main>
+</BaseLayout>
+
+<style>
+  main { max-width: 860px; margin: 0 auto; padding: 0 clamp(24px, 6vw, 80px); }
+  h1 { font-weight: 800; font-size: clamp(32px, 4.6vw, 46px); letter-spacing: -0.02em; text-align: center; margin-top: clamp(28px, 6vh, 56px); }
+  section { margin-top: clamp(48px, 8vh, 72px); }
+  h2 { font-weight: 800; font-size: clamp(22px, 2.8vw, 28px); letter-spacing: -0.02em; margin-bottom: 28px; }
+
+  .role { padding: 30px 0; border-top: 1px solid var(--line); }
+  .role:last-child { border-bottom: 1px solid var(--line); }
+  .role h3 { font-weight: 700; font-size: 19px; letter-spacing: -0.01em; }
+  .role .org { margin-top: 4px; font-size: 12px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+  .role ul { margin: 16px 0 0 18px; }
+  .role li { font-size: 14.5px; color: #3a3a3a; line-height: 1.7; margin-bottom: 10px; }
+  .role .pending { margin-top: 12px; font-size: 13.5px; font-style: italic; color: var(--muted); }
+
+  .edu { padding: 22px 0; border-top: 1px solid var(--line); }
+  .edu:last-child { border-bottom: 1px solid var(--line); }
+  .edu h3 { font-weight: 700; font-size: 16.5px; }
+  .edu .where { margin-top: 4px; font-size: 13px; color: var(--muted); }
+  .edu p { margin-top: 10px; font-size: 14px; color: #3a3a3a; line-height: 1.65; }
+
+  .skill-group { margin-bottom: 30px; }
+  .skill-group h3 { font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
+</style>

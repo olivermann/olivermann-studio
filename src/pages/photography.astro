@@ -1,0 +1,142 @@
+---
+import { getCollection } from 'astro:content';
+import { getImage, Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Lightbox from '../components/Lightbox.astro';
+
+// Gallery is driven by src/data/photos.yaml (validated by the photos collection
+// schema). Image files live in src/assets/photos/ so Astro optimizes them.
+const entries = await getCollection('photos');
+const photos = entries
+  .map((e) => e.data)
+  .sort((a, b) => b.date.valueOf() - a.date.valueOf());
+
+const files = import.meta.glob<{ default: ImageMetadata }>(
+  '../assets/photos/*.{jpg,jpeg,png,webp}',
+  { eager: true }
+);
+
+function resolvePhoto(src: string): ImageMetadata {
+  const hit = Object.entries(files).find(([path]) => path.endsWith(`/${src}`));
+  if (!hit) {
+    throw new Error(
+      `photos.yaml references "${src}" but no such file exists in src/assets/photos/`
+    );
+  }
+  return hit[1].default;
+}
+
+// Pre-render a large version of each photo for the lightbox.
+const gallery = await Promise.all(
+  photos.map(async (p) => {
+    const meta = resolvePhoto(p.src);
+    const large = await getImage({ src: meta, width: 1600 });
+    return { ...p, meta, largeSrc: large.src };
+  })
+);
+---
+
+<BaseLayout
+  title="Photography · Oliver Mann"
+  description="Portrait and event photography by Oliver Mann, a Vancouver-based photographer."
+  active="photography"
+>
+
+<section class="intro">
+  <h1>Photography</h1>
+</section>
+
+<div class="filters centered" role="tablist" aria-label="Filter photos">
+  <button class="active" data-filter="all" role="tab" aria-selected="true">All</button>
+  <button data-filter="portrait" role="tab" aria-selected="false">Portraits</button>
+  <button data-filter="event" role="tab" aria-selected="false">Events</button>
+</div>
+
+<div class="grid" id="grid">
+  {gallery.map((p, i) => (
+    <figure
+      class="fade-in"
+      data-category={p.category}
+      data-index={i}
+      data-large={p.largeSrc}
+      data-alt={p.alt}
+      data-caption={p.caption}
+      data-album={p.flickrAlbum}
+    >
+      <Image
+        src={p.meta}
+        alt={p.alt}
+        widths={[480, 800, 1200]}
+        sizes="(max-width: 560px) 92vw, (max-width: 900px) 46vw, 420px"
+        loading={i < 6 ? 'eager' : 'lazy'}
+      />
+    </figure>
+  ))}
+</div>
+
+<p class="see-more">Want to see more from a shoot? <a href="mailto:hello@olivermann.studio">Get in touch</a></p>
+
+<Lightbox />
+</BaseLayout>
+
+<style>
+  .intro { text-align: center; max-width: 640px; margin: clamp(28px, 6vh, 56px) auto 0; padding: 0 24px; }
+  .intro h1 { font-weight: 800; font-size: clamp(32px, 4.6vw, 46px); letter-spacing: -0.02em; }
+
+  .filters { justify-content: center; gap: clamp(20px, 4vw, 44px); margin: 40px 0 48px; }
+
+  .grid { columns: 3; column-gap: 28px; padding: 0 clamp(24px, 6vw, 80px); max-width: 1400px; margin: 0 auto; }
+  @media (max-width: 900px) { .grid { columns: 2; column-gap: 20px; } }
+  @media (max-width: 560px) { .grid { columns: 1; } }
+  .grid figure { break-inside: avoid; margin: 0 0 28px; cursor: zoom-in; position: relative; overflow: hidden; }
+  .grid figure :global(img) { width: 100%; height: auto; display: block; transition: transform 0.4s ease, opacity 0.4s ease; }
+  .grid figure:hover :global(img) { transform: scale(1.015); }
+  .grid figure.hidden { display: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .grid figure:hover :global(img) { transform: none; }
+  }
+
+  .see-more { text-align: center; font-size: 14px; color: var(--muted); margin: 56px 24px 0; }
+  .see-more a { text-decoration: underline; }
+</style>
+
+<script>
+  const figures = Array.from(document.querySelectorAll<HTMLElement>('.grid figure'));
+  const lb = (window as any).omLightbox;
+
+  lb.setItems(
+    figures.map((f) => ({
+      src: f.dataset.large!,
+      alt: f.dataset.alt || '',
+      caption: f.dataset.caption || undefined,
+      album: f.dataset.album || undefined,
+    }))
+  );
+
+  let currentFilter = 'all';
+  const visibleIndices = () =>
+    figures
+      .filter((f) => currentFilter === 'all' || f.dataset.category === currentFilter)
+      .map((f) => Number(f.dataset.index));
+
+  figures.forEach((f) => {
+    f.addEventListener('click', () => lb.open(Number(f.dataset.index), visibleIndices()));
+  });
+
+  document.querySelectorAll<HTMLButtonElement>('.filters button').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      currentFilter = btn.dataset.filter!;
+      document.querySelectorAll('.filters button').forEach((b) => {
+        b.classList.toggle('active', b === btn);
+        b.setAttribute('aria-selected', b === btn ? 'true' : 'false');
+      });
+      figures.forEach((f) => {
+        f.classList.toggle(
+          'hidden',
+          currentFilter !== 'all' && f.dataset.category !== currentFilter
+        );
+      });
+    });
+  });
+</script>

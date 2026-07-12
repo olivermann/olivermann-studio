@@ -1,0 +1,81 @@
+---
+// Shared lightbox, used by the Photography page and by images inside blog posts.
+// Pages register their image set via window.omLightbox.setItems([...]) and call
+// window.omLightbox.open(index). Items: { src, alt, caption?, album? }.
+---
+
+<div class="lightbox" id="om-lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
+  <button class="lb-close" aria-label="Close">&times;</button>
+  <button class="lb-prev" aria-label="Previous image">&#8249;</button>
+  <button class="lb-next" aria-label="Next image">&#8250;</button>
+  <div class="lightbox-stage"><img id="om-lb-img" src="" alt="" /></div>
+  <div class="lightbox-caption" id="om-lb-caption"></div>
+</div>
+
+<script>
+  type LbItem = { src: string; alt: string; caption?: string; album?: string };
+
+  const box = document.getElementById('om-lightbox')!;
+  const img = document.getElementById('om-lb-img') as HTMLImageElement;
+  const captionEl = document.getElementById('om-lb-caption')!;
+
+  let items: LbItem[] = [];
+  let visible: number[] = []; // indices currently navigable (e.g. the filtered set)
+  let current = 0;
+
+  function show() {
+    const it = items[current];
+    if (!it) return;
+    img.src = it.src;
+    img.alt = it.alt;
+    captionEl.textContent = '';
+    if (it.caption) captionEl.append(it.caption);
+    if (it.album) {
+      const a = document.createElement('a');
+      a.className = 'album-link';
+      a.href = it.album;
+      a.target = '_blank';
+      a.rel = 'noopener';
+      a.innerHTML = 'View full album on Flickr &#8599;';
+      captionEl.append(a);
+    }
+  }
+
+  function open(index: number, visibleIndices?: number[]) {
+    visible = visibleIndices && visibleIndices.length ? visibleIndices : items.map((_, i) => i);
+    current = index;
+    show();
+    box.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function close() {
+    box.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  function step(dir: number) {
+    const pos = visible.indexOf(current);
+    current = visible[(pos + dir + visible.length) % visible.length];
+    show();
+  }
+
+  box.querySelector('.lb-close')!.addEventListener('click', close);
+  box.querySelector('.lb-prev')!.addEventListener('click', (e) => { e.stopPropagation(); step(-1); });
+  box.querySelector('.lb-next')!.addEventListener('click', (e) => { e.stopPropagation(); step(1); });
+  box.addEventListener('click', (e) => {
+    const t = e.target as HTMLElement;
+    if (t === box || t.classList.contains('lightbox-stage')) close();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (!box.classList.contains('open')) return;
+    if (e.key === 'Escape') close();
+    if (e.key === 'ArrowLeft') step(-1);
+    if (e.key === 'ArrowRight') step(1);
+  });
+
+  (window as any).omLightbox = {
+    setItems(list: LbItem[]) { items = list; },
+    open,
+  };
+</script>

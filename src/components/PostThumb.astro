@@ -1,0 +1,32 @@
+---
+import { Image } from 'astro:assets';
+import type { Post } from '../lib/posts';
+import { youtubeThumb } from '../lib/posts';
+
+interface Props {
+  post: Post;
+  widths?: number[];
+  sizes?: string;
+  placeholder?: string;
+}
+
+const {
+  post,
+  widths = [240, 480, 800],
+  sizes = '(max-width: 560px) 90vw, (max-width: 900px) 45vw, 360px',
+  placeholder = 'Image to come',
+} = Astro.props;
+const d = post.data;
+---
+
+<div class="thumb">
+  {
+    d.heroImage ? (
+      <Image src={d.heroImage} alt="" widths={widths} sizes={sizes} loading="lazy" />
+    ) : d.heroVideoId ? (
+      <img src={youtubeThumb(d.heroVideoId)} alt="" loading="lazy" />
+    ) : (
+      placeholder
+    )
+  }
+</div>

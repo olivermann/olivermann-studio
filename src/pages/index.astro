@@ -1,0 +1,271 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostThumb from '../components/PostThumb.astro';
+import {
+  getPublishedPosts,
+  featuredPosts,
+  storytellingPosts,
+  researchRowPosts,
+  speakingPosts,
+  postHref,
+  isExternal,
+  shortDate,
+  longDate,
+  TYPE_LABELS,
+} from '../lib/posts';
+
+const posts = await getPublishedPosts();
+
+// 5.2 Featured Case Studies: rank 1 = big slot, ranks 2-4 = stacked rows.
+const featured = featuredPosts(posts);
+const featuredBig = featured[0];
+const featuredRows = featured.slice(1);
+
+// 5.3 Storytelling: writing/video/podcast posts; latest 6 per filter (client-side cap).
+const stories = storytellingPosts(posts);
+
+// 5.4 Research & Indigenous Engagement.
+const RESEARCH_BIG_ID = 'ethical-storytelling-ma-research';
+const researchBig = posts.find((p) => p.id === RESEARCH_BIG_ID);
+const researchRows = researchRowPosts(posts, RESEARCH_BIG_ID).slice(0, 3);
+const researchLead =
+  'During my MA in Professional Communications at Royal Roads University, I developed frameworks for ethical, equity-driven storytelling in institutional communications, advocating for Indigenous-led storytelling and decolonizing communication practices. This research continues to shape how I approach community and Indigenous engagement work today.';
+
+// 5.5 Speaking & Leadership: latest 3 on the home page.
+const speaking = speakingPosts(posts).slice(0, 3);
+
+const monthYear = (d: Date) =>
+  d.toLocaleDateString('en-US', { timeZone: 'UTC', month: 'short', year: 'numeric' });
+const storyFormat = (p: (typeof stories)[number]) => TYPE_LABELS[p.data.types[0]];
+---
+
+<BaseLayout
+  title="Oliver Mann · Communications Strategist & Photographer"
+  description="Oliver Mann is a Vancouver-based communications strategist and photographer: case studies, storytelling, research, and speaking from 15 years leading marketing and communications at UBC."
+  active="home"
+>
+<main>
+
+  <!-- 5.1 Hero: name + typed line only -->
+  <section class="hero">
+    <h1>Oliver Mann</h1>
+    <p class="typed-line">I am a <span class="typed" id="typed">communications strategist</span></p>
+  </section>
+
+  <!-- 5.2 Featured Case Studies -->
+  <section class="fade-in">
+    <div class="section-head">
+      <h2>Featured Case Studies</h2>
+      <a class="view-more" href="/blog/#case-studies">View more case studies &rarr;</a>
+    </div>
+    <div class={featuredRows.length === 0 ? 'split single' : 'split'}>
+      {featuredBig && (
+        <a class="big-card" href={postHref(featuredBig)}>
+          <PostThumb post={featuredBig} placeholder="Hero image to come" widths={[480, 800, 1200]} sizes="(max-width: 820px) 90vw, 600px" />
+          <p class="tag">Case Study</p>
+          <h3 class="title">{featuredBig.data.title}</h3>
+          <p class="date">{longDate(featuredBig.data.date)}</p>
+          <p class="excerpt">{featuredBig.data.excerpt}</p>
+        </a>
+      )}
+      {featuredRows.length > 0 && (
+        <div class="rows">
+          {featuredRows.map((p) => (
+            <a class="row-card" href={postHref(p)}>
+              <PostThumb post={p} placeholder="Image to come" widths={[240, 480]} sizes="120px" />
+              <div>
+                <p class="tag">Case Study</p>
+                <h3 class="title">{p.data.title}</h3>
+                <p class="date">{longDate(p.data.date)}</p>
+              </div>
+            </a>
+          ))}
+        </div>
+      )}
+    </div>
+  </section>
+
+  <!-- 5.3 Storytelling: latest 6 shown, filterable by format -->
+  <section class="fade-in">
+    <div class="section-head">
+      <h2>Storytelling</h2>
+      <a class="view-more" href="/blog/#storytelling">View more stories &rarr;</a>
+    </div>
+    <div class="filters" role="tablist" aria-label="Filter stories">
+      <button class="active" data-filter="all">All</button>
+      <button data-filter="Writing">Writing</button>
+      <button data-filter="Video">Video</button>
+      <button data-filter="Podcast">Podcast</button>
+    </div>
+    <div class="cards" id="stories">
+      {stories.map((p) => (
+        <a
+          class="card"
+          data-format={storyFormat(p)}
+          href={postHref(p)}
+          target={isExternal(p) ? '_blank' : undefined}
+          rel={isExternal(p) ? 'noopener' : undefined}
+        >
+          <PostThumb post={p} />
+          <div class="meta">
+            <span>{storyFormat(p)}</span>
+            <span class="date">{shortDate(p.data.date)}</span>
+            {isExternal(p) && <span class="out">&#8599;</span>}
+          </div>
+          <h3 class="title">{p.data.title}</h3>
+          <p class="excerpt">{p.data.excerpt}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <!-- 5.4 Research & Indigenous Engagement -->
+  <section class="fade-in">
+    <div class="section-head">
+      <h2>Research &amp; Indigenous Engagement</h2>
+      <a class="view-more" href="/blog/#research">View more &rarr;</a>
+    </div>
+    <div class="split">
+      {researchBig && (
+        <a class="big-card" href={postHref(researchBig)}>
+          <PostThumb post={researchBig} placeholder="Image to come" widths={[480, 800, 1200]} sizes="(max-width: 820px) 90vw, 600px" />
+          <p class="tag">MA Research</p>
+          <h3 class="title">{researchBig.data.title}</h3>
+          <p class="lead-copy">{researchLead}</p>
+        </a>
+      )}
+      <div class="rows">
+        {researchRows.map((p) => (
+          <a
+            class="row-card"
+            href={postHref(p)}
+            target={isExternal(p) ? '_blank' : undefined}
+            rel={isExternal(p) ? 'noopener' : undefined}
+          >
+            <PostThumb post={p} widths={[240, 480]} sizes="120px" />
+            <div>
+              <p class="tag">
+                {TYPE_LABELS[p.data.types[0]]} · {monthYear(p.data.date)}
+                {isExternal(p) && <span class="out">&#8599;</span>}
+              </p>
+              <h3 class="title">{p.data.title}</h3>
+            </div>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- 5.5 Speaking & Leadership -->
+  <section class="fade-in">
+    <div class="section-head">
+      <h2>Speaking &amp; Leadership</h2>
+      <a class="view-more" href="/blog/#speaking">View more &rarr;</a>
+    </div>
+    <div class="cards">
+      {speaking.map((p) => (
+        <a
+          class="card"
+          href={postHref(p)}
+          target={isExternal(p) ? '_blank' : undefined}
+          rel={isExternal(p) ? 'noopener' : undefined}
+        >
+          <PostThumb post={p} />
+          <div class="meta">
+            {p.data.role && <span>{p.data.role}</span>}
+            <span class="date">{p.data.date.getUTCFullYear()}</span>
+            {isExternal(p) && <span class="out">&#8599;</span>}
+          </div>
+          <h3 class="title">{p.data.title}</h3>
+          <p class="excerpt">{p.data.excerpt}</p>
+        </a>
+      ))}
+    </div>
+  </section>
+
+</main>
+</BaseLayout>
+
+<style>
+  main { max-width: 1160px; margin: 0 auto; padding: 0 clamp(24px, 6vw, 80px); }
+  section { margin-top: clamp(64px, 10vh, 104px); }
+  .hero { margin-top: clamp(28px, 5vh, 48px); }
+  .hero h1 { font-weight: 800; font-size: clamp(34px, 4.6vw, 52px); letter-spacing: -0.02em; }
+  .hero .typed-line { margin-top: 18px; font-size: clamp(20px, 2.6vw, 28px); font-weight: 500; min-height: 1.5em; }
+  .hero .typed { font-weight: 800; border-right: 2px solid var(--text); padding-right: 3px; }
+  @media (prefers-reduced-motion: reduce) {
+    .hero .typed { border-right: none; }
+  }
+</style>
+
+<script>
+  // ---------- Typed rotating roles (respects prefers-reduced-motion) ----------
+  const roles = [
+    'communications strategist',
+    'marketer',
+    'photographer',
+    'videographer',
+    'podcaster',
+    'writer',
+    'event manager',
+    'researcher',
+    'speaker',
+  ];
+  const typedEl = document.getElementById('typed')!;
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduced) {
+    let wordIdx = 0;
+    let charIdx = roles[0].length;
+    let deleting = true;
+    let pauseUntil = Date.now() + 1600;
+    function tick() {
+      if (Date.now() < pauseUntil) {
+        requestAnimationFrame(tick);
+        return;
+      }
+      if (deleting) {
+        charIdx--;
+        typedEl.textContent = roles[wordIdx].slice(0, charIdx);
+        if (charIdx === 0) {
+          deleting = false;
+          wordIdx = (wordIdx + 1) % roles.length;
+          pauseUntil = Date.now() + 300;
+        } else pauseUntil = Date.now() + 40;
+      } else {
+        charIdx++;
+        typedEl.textContent = roles[wordIdx].slice(0, charIdx);
+        if (charIdx === roles[wordIdx].length) {
+          deleting = true;
+          pauseUntil = Date.now() + 1800;
+        } else pauseUntil = Date.now() + 70;
+      }
+      requestAnimationFrame(tick);
+    }
+    requestAnimationFrame(tick);
+  }
+
+  // ---------- Storytelling: show latest 6 of the active filter ----------
+  const cards = Array.from(
+    document.querySelectorAll<HTMLElement>('#stories .card')
+  );
+  function applyStoryFilter(filter: string) {
+    let shown = 0;
+    cards.forEach((c) => {
+      const match = filter === 'all' || c.dataset.format === filter;
+      const visible = match && shown < 6;
+      c.classList.toggle('hidden', !visible);
+      if (visible) shown++;
+    });
+  }
+  applyStoryFilter('all');
+  document
+    .querySelectorAll<HTMLButtonElement>('.filters button')
+    .forEach((btn) => {
+      btn.addEventListener('click', () => {
+        document
+          .querySelectorAll('.filters button')
+          .forEach((b) => b.classList.toggle('active', b === btn));
+        applyStoryFilter(btn.dataset.filter!);
+      });
+    });
+</script>

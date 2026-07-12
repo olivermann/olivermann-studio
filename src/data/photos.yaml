@@ -1,0 +1,140 @@
+# Photography page gallery. One entry per photo.
+# The gallery is ordered by date, newest first (list order does not matter).
+#
+# Fields:
+#   src:         filename inside src/assets/photos/ (required)
+#   alt:         descriptive alt text (required)
+#   category:    portrait | event (required)
+#   date:        YYYY-MM-DD, date taken (required, drives the order)
+#   caption:     optional, shown in the lightbox
+#   flickrAlbum: optional, event photos only. Renders the
+#                "View full album on Flickr" link in the lightbox.
+
+# ---- Events (2026) ----
+- src: "cohort-day-june-2026-session-16.jpg"
+  alt: "Two presenters sharing a laugh at the front of the room during Venture Founder Session 16"
+  category: event
+  date: 2026-06-25
+  caption: "Cohort Day June 2026: Venture Founder Session 16"
+  flickrAlbum: "https://www.flickr.com/photos/163166916@N03/albums/72177720334415383/"
+
+- src: "web-summit-2026-climate-innovation-zone.jpg"
+  alt: "Panel discussion on stage in the Climate Innovation Zone at Web Summit 2026"
+  category: event
+  date: 2026-05-14
+  caption: "Web Summit 2026: Climate Innovation Zone"
+  flickrAlbum: "https://www.flickr.com/photos/163166916@N03/albums/72177720333804314/"
+
+- src: "c51-mentor-social-feb-2026.jpg"
+  alt: "Guests laughing in conversation at the C51 Mentor Social and Best Practices Session"
+  category: event
+  date: 2026-02-12
+  caption: "C51 Mentor Social and Best Practices Session, February 2026"
+  flickrAlbum: "https://www.flickr.com/photos/163166916@N03/albums/72177720333280800/"
+
+- src: "c50-cohort-day-feb-2026.jpg"
+  alt: "Attendees networking in a bright lobby at C50 Cohort Day"
+  category: event
+  date: 2026-02-04
+  caption: "C50 Cohort Day, February 2026"
+  flickrAlbum: "https://www.flickr.com/photos/163166916@N03/albums/72177720333287721/"
+
+- src: "venture-founder-c50-session-15.jpg"
+  alt: "Presenter with arms raised as audience members raise their hands at Venture Founder C50 Session 15"
+  category: event
+  date: 2026-01-29
+  caption: "2026 Venture Founder C50 Session 15"
+  flickrAlbum: "https://www.flickr.com/photos/163166916@N03/albums/72177720331800821/"
+
+- src: "venture-founder-c51-orientation.jpg"
+  alt: "Participants with name tags smiling during the 2026 Venture Founder C51 Orientation"
+  category: event
+  date: 2026-01-29
+  caption: "2026 Venture Founder C51 Orientation"
+  flickrAlbum: "https://www.flickr.com/photos/163166916@N03/albums/72177720331790565/"
+
+# ---- Portraits (dates from EXIF) ----
+- src: "portrait-red-jacket.jpg"
+  alt: "Model in a red jacket reclining on pavement beside a chain-link fence"
+  category: portrait
+  date: 2017-05-06
+
+- src: "portrait-leather-jacket-sky.jpg"
+  alt: "Model pulling a leather jacket overhead against a deep blue sky on an industrial street"
+  category: portrait
+  date: 2017-05-06
+
+- src: "portrait-smoke-bw.jpg"
+  alt: "Black and white portrait of a model exhaling smoke, hair tied up"
+  category: portrait
+  date: 2017-03-26
+
+- src: "studio-portrait-curls-bw.jpg"
+  alt: "Black and white studio portrait of a model with long curls, jacket open"
+  category: portrait
+  date: 2017-03-26
+
+- src: "the-boundary-donoh-10.jpg"
+  alt: "Model wearing a multicoloured fur hat with sequins beneath one eye"
+  category: portrait
+  date: 2017-02-25
+
+- src: "the-boundary-donoh-03.jpg"
+  alt: "Model reclining in tall dried grass in denim, photographed for The Boundary"
+  category: portrait
+  date: 2017-02-25
+
+- src: "the-boundary-donoh-01.jpg"
+  alt: "Model in a patterned blue jacket and grey hoodie photographed against the sea and sky"
+  category: portrait
+  date: 2017-02-25
+
+- src: "terrick-portrait-05.jpg"
+  alt: "Portrait of a red-haired model gripping the collar of an olive bomber jacket"
+  category: portrait
+  date: 2017-02-18
+
+- src: "huf-mag-beyond-expectation-08.jpg"
+  alt: "HUF Magazine editorial close-up: model with sequin details above the eye, wearing a leather jacket"
+  category: portrait
+  date: 2017-02-12
+
+- src: "huf-mag-beyond-expectation-07.jpg"
+  alt: "HUF Magazine editorial: model in a shearling-collared leather jacket standing in winter grassland"
+  category: portrait
+  date: 2017-02-12
+
+- src: "huf-mag-beyond-expectation-03.jpg"
+  alt: "HUF Magazine editorial page: model in a flat cap and floral bow tie under a blue sky"
+  category: portrait
+  date: 2017-02-12
+
+- src: "smallville-editorial-09.jpg"
+  alt: "Model in a bomber jacket patched with international flags, standing before a snow-covered cabin"
+  category: portrait
+  date: 2017-02-07
+
+- src: "smallville-editorial-01.jpg"
+  alt: "Portrait of a model in round glasses and a plaid scarf gazing upward against a blue sky"
+  category: portrait
+  date: 2017-02-07
+
+- src: "ding-deva-editorial-03.jpg"
+  alt: "Editorial portrait of two models posed against a blue playground structure by the waterfront"
+  category: portrait
+  date: 2017-01-20
+
+- src: "ding-deva-editorial-05.jpg"
+  alt: "Sunlit portrait of a model in a grey tweed coat against a concrete wall"
+  category: portrait
+  date: 2017-01-20
+
+- src: "portrait-grasses-denim.jpg"
+  alt: "Model in a black beanie crouched among tall dried grasses in denim"
+  category: portrait
+  date: 2017-01-14
+
+- src: "street-portrait-bw.jpg"
+  alt: "High-contrast black and white street portrait of a model with a dark fringe"
+  category: portrait
+  date: 2016-10-05

@@ -1,0 +1,139 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostThumb from '../../components/PostThumb.astro';
+import {
+  getPublishedPosts,
+  postHref,
+  isExternal,
+  tagLabel,
+  shortDate,
+} from '../../lib/posts';
+
+const posts = await getPublishedPosts();
+
+// For speaking entries the role leads the excerpt on this page ("Moderator. ...").
+const rowExcerpt = (p: (typeof posts)[number]) =>
+  p.data.role ? `${p.data.role}. ${p.data.excerpt}` : p.data.excerpt;
+---
+
+<BaseLayout
+  title="Blog · Oliver Mann"
+  description="Case studies and published work by Oliver Mann: communications case studies, writing, video, podcasts, research, and speaking."
+  active="blog"
+>
+<main>
+  <div class="intro">
+    <h1>Blog</h1>
+    <p>Case studies and published work. Pieces marked with an arrow link out to where they were originally published.</p>
+  </div>
+
+  <div class="filters centered" role="tablist" aria-label="Filter posts">
+    <button class="active" data-filter="all">All</button>
+    <button data-filter="case-study">Case Studies</button>
+    <button data-filter="writing">Writing</button>
+    <button data-filter="video">Video</button>
+    <button data-filter="podcast">Podcast</button>
+    <button data-filter="research">Research &amp; Indigenous Engagement</button>
+    <button data-filter="speaking">Speaking &amp; Leadership</button>
+  </div>
+
+  <div class="posts" id="posts">
+    {posts.map((p) => (
+      <a
+        class="post fade-in"
+        data-types={p.data.types.join(' ')}
+        href={postHref(p)}
+        target={isExternal(p) ? '_blank' : undefined}
+        rel={isExternal(p) ? 'noopener' : undefined}
+      >
+        <PostThumb post={p} widths={[240, 480]} sizes="190px" />
+        <div>
+          <div class="meta">
+            <span>{tagLabel(p)}</span>
+            <span class="date">{shortDate(p.data.date)}</span>
+            {isExternal(p) && <span class="out">&#8599;</span>}
+          </div>
+          <h2>{p.data.title}</h2>
+          <p>{rowExcerpt(p)}</p>
+        </div>
+      </a>
+    ))}
+  </div>
+</main>
+</BaseLayout>
+
+<style>
+  main { max-width: 900px; margin: 0 auto; padding: 0 clamp(24px, 6vw, 80px); }
+  .intro { text-align: center; margin: clamp(28px, 6vh, 56px) auto 0; }
+  .intro h1 { font-weight: 800; font-size: clamp(32px, 4.6vw, 46px); letter-spacing: -0.02em; }
+  .intro p { margin-top: 14px; font-size: 14.5px; color: var(--muted); }
+  .filters { justify-content: center; margin: 36px 0 8px; }
+  .posts { margin-top: 24px; }
+  .post {
+    display: grid;
+    grid-template-columns: 190px 1fr;
+    gap: 22px;
+    align-items: center;
+    color: var(--text);
+    padding: 22px 0;
+    border-top: 1px solid var(--line);
+    min-height: 164px;
+  }
+  .posts .post:last-child { border-bottom: 1px solid var(--line); }
+  .post.hidden { display: none; }
+  .post:hover { text-decoration: none; }
+  .post:hover h2 { text-decoration: underline; }
+  .post :global(.thumb) { aspect-ratio: 16 / 10; font-size: 10px; }
+  .post .meta { display: flex; gap: 12px; align-items: baseline; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+  .post .meta .date { font-weight: 400; letter-spacing: 0.04em; text-transform: none; }
+  .post .meta .out { font-size: 12px; }
+  .post h2 { font-weight: 700; font-size: clamp(17px, 2.2vw, 21px); line-height: 1.3; margin-top: 8px; letter-spacing: -0.01em; }
+  .post p { margin-top: 8px; font-size: 13.5px; color: var(--muted); line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  @media (max-width: 620px) {
+    .post { grid-template-columns: 110px 1fr; gap: 16px; min-height: 0; }
+    .post p { display: none; }
+  }
+</style>
+
+<script>
+  // Filters + hash deep links (#case-studies, #writing, #video, #podcast,
+  // #research, #speaking). #storytelling is a combined writing+video+podcast
+  // view used by the home page link; it has no tab of its own. The Research
+  // tab also pulls in posts tagged indigenous-engagement.
+  const hashMap: Record<string, string> = {
+    'case-studies': 'case-study',
+    writing: 'writing',
+    video: 'video',
+    podcast: 'podcast',
+    research: 'research',
+    speaking: 'speaking',
+    storytelling: 'storytelling',
+  };
+  const groups: Record<string, string[]> = {
+    storytelling: ['writing', 'video', 'podcast'],
+    research: ['indigenous-engagement'],
+  };
+
+  function applyFilter(f: string) {
+    document
+      .querySelectorAll<HTMLButtonElement>('.filters button')
+      .forEach((b) => b.classList.toggle('active', b.dataset.filter === f));
+    const match = (types: string[]) =>
+      f === 'all' || types.includes(f) || types.some((t) => (groups[f] || []).includes(t));
+    document.querySelectorAll<HTMLElement>('.post').forEach((p) => {
+      p.classList.toggle('hidden', !match((p.dataset.types || '').split(' ')));
+    });
+  }
+
+  document.querySelectorAll<HTMLButtonElement>('.filters button').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const f = btn.dataset.filter!;
+      applyFilter(f);
+      const slug = Object.keys(hashMap).find((k) => hashMap[k] === f);
+      history.replaceState(null, '', f === 'all' ? location.pathname : '#' + slug);
+    });
+  });
+
+  const initial = hashMap[location.hash.replace('#', '')];
+  if (initial) applyFilter(initial);
+</script>
