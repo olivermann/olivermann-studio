@@ -6,7 +6,7 @@ draft: false
 skillsTags: ["Campaign Strategy", "Email Marketing", "Social Media", "Paid Advertising", "Analytics"]
 excerpt: "A multi-channel recruitment campaign built to grow applications to UBC's flagship venture-building program."
 featured: true
-featuredRank: 1
+featuredRank: 3
 ---
 
 ## Situation
