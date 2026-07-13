@@ -32,7 +32,7 @@ a:hover { text-decoration: underline; }
   align-items: baseline;
   padding: 36px clamp(24px, 6vw, 80px) 20px;
 }
-.wordmark { font-weight: 800; font-size: 22px; letter-spacing: -0.01em; }
+.wordmark { font-weight: 800; font-size: 22px; letter-spacing: -0.01em; white-space: nowrap; }
 .site-nav { display: flex; gap: clamp(16px, 3vw, 36px); }
 .site-nav a {
   font-size: 12px;
@@ -43,6 +43,17 @@ a:hover { text-decoration: underline; }
 }
 .site-nav a.active { color: var(--text); border-bottom: 2px solid var(--text); padding-bottom: 3px; }
 .site-nav a:hover { color: var(--text); text-decoration: none; }
+
+@media (max-width: 600px) {
+  .site-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    padding-top: 24px;
+    padding-bottom: 16px;
+  }
+  .site-nav { flex-wrap: wrap; gap: 14px 22px; }
+}
 
 /* ---------- Footer ---------- */
 .site-footer {
