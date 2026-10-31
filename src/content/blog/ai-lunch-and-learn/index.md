@@ -17,4 +17,4 @@ Throughout the month, we use Asana to collect newsletter content in one place. W
 
 ## Producing audiobooks with Adobe Podcast
 
-A walkthrough of recording, editing, and exporting audio with Adobe Podcast, and how the same workflow can turn written content into accessible audio formats.
+A walkthrough of recording, editing, and exporting audio with Adobe Podcast.
