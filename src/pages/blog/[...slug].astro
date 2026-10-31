@@ -55,7 +55,7 @@ const byline = ['Oliver Mann', d.role, longDate(d.date)].filter(Boolean).join(' 
       <div class="hero-placeholder">Hero image to come</div>
     )
   }
-  {d.heroCaption && <p class="hero-caption">{d.heroCaption}</p>}
+  {d.heroCaption && <p class="hero-caption" set:html={d.heroCaption} />}
 </div>
 
 <article>
@@ -98,6 +98,7 @@ const byline = ['Oliver Mann', d.role, longDate(d.date)].filter(Boolean).join(' 
   article { max-width: 720px; margin: 0 auto; padding: 0 clamp(24px, 6vw, 80px); }
   .hero-media { max-width: 1000px; margin: clamp(20px, 4vh, 40px) auto 0; padding: 0 clamp(24px, 6vw, 80px); }
   .hero-media img { width: 100%; height: auto; display: block; }
+  .hero-caption a { text-decoration: underline; text-underline-offset: 3px; }
   .hero-caption { margin-top: 10px; font-size: 13px; line-height: 1.5; color: var(--muted); }
   .video-frame { aspect-ratio: 16 / 9; }
   .video-frame iframe { width: 100%; height: 100%; border: 0; display: block; }
