@@ -69,6 +69,15 @@ const byline = ['Oliver Mann', d.role, longDate(d.date)].filter(Boolean).join(' 
     <Content />
   </div>
 
+  {d.originalUrl && (
+    <div class="origin-note">
+      <p>
+        This story was originally published on{' '}
+        <a href={d.originalUrl}>{d.originalSite ?? new URL(d.originalUrl).hostname}</a> on {longDate(d.date)}.
+      </p>
+    </div>
+  )}
+
   {d.skillsTags.length > 0 && (
     <div class="skills">
       <h2>Skills Demonstrated</h2>
@@ -110,6 +119,12 @@ const byline = ['Oliver Mann', d.role, longDate(d.date)].filter(Boolean).join(' 
   .screens { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 28px 0; }
   @media (max-width: 560px) { .screens { grid-template-columns: 1fr; } }
   .screens > div { aspect-ratio: 16 / 10; background: var(--ph); display: flex; align-items: center; justify-content: center; color: var(--ph-text); font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; text-align: center; padding: 12px; }
+
+  .body iframe { border-radius: 12px; }
+  .body a { text-decoration: underline; text-underline-offset: 3px; }
+  .origin-note { margin-top: 36px; }
+  .origin-note p { background: #F5F5F5; border-left: 3px solid var(--text); padding: 12px 16px; font-size: 14px; line-height: 1.6; color: #2e2e2e; }
+  .origin-note a { text-decoration: underline; text-underline-offset: 3px; }
 
   .skills { margin-top: 44px; padding-top: 26px; border-top: 1px solid var(--line); }
   .skills h2 { font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
