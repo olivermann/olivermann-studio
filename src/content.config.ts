@@ -36,6 +36,10 @@ const blog = defineCollection({
         excerpt: z.string().min(1),
         featured: z.boolean().default(false),
         featuredRank: z.number().int().min(1).max(4).optional(),
+        // Republished stories: shows an "originally published on ..." note at the bottom of the post.
+        // The note uses the post's own date as the original publication date.
+        originalUrl: z.string().url().optional(),
+        originalSite: z.string().optional(), // display name, e.g. "communityengagement.ubc.ca"
         externalLink: z
           .string()
           .url()
