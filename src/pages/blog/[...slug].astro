@@ -113,7 +113,9 @@ const byline = ['Oliver Mann', d.role, longDate(d.date)].filter(Boolean).join(' 
   .body h2 { font-weight: 800; font-size: 20px; letter-spacing: -0.01em; margin: 36px 0 12px; }
   .body p, .body li { font-size: 16px; line-height: 1.8; color: #2e2e2e; }
   .body p + p { margin-top: 16px; }
+  .body p + ul, .body p + ol { margin-top: 12px; }
   .body ul, .body ol { margin: 0 0 0 20px; }
+  .body ul + p, .body ol + p { margin-top: 16px; }
   .body li { margin-bottom: 8px; }
   .body em { color: var(--muted); }
   .body img { max-width: 100%; height: auto; display: block; margin: 28px 0; cursor: zoom-in; }
