@@ -6,17 +6,19 @@ draft: false
 role: "Organizer & Presenter"
 heroImage: "./hero-ai-lunch-and-learn.jpeg"
 heroImageAlt: "Presenting the AI Lunch and Learn session to Innovation UBC staff"
-excerpt: "Two use cases: accelerating the monthly newsletter with Asana and a custom Claude skill, and producing audiobooks with Adobe Podcast."
+excerpt: "An internal Lunch and Learn where colleagues from across Innovation UBC shared how they use AI, from work tools to creative experiments to personal life hacks."
 ---
 
-In this internal Innovation UBC Lunch and Learn, I organized and presented a session on how our team is putting AI to work in day-to-day communications, walking through two production use cases.
+On June 3, 2026, [Innovation UBC](https://www.linkedin.com/company/innovationubc/) held a Lunch and Learn on how our staff are using AI. I organized the session, and five of us presented. I also shared two of my own use cases: a newsletter workflow built on Asana and a custom Claude skill, and a storytelling project using Adobe Podcast.
+
+## My presentation
+
+I presented two use cases.
 
 ## Accelerating the monthly newsletter
 
-Using Asana as the source of truth and a custom-built Claude skill, the monthly newsletter now moves from scattered project updates to a drafted, formatted edition in a fraction of the time.
+Throughout the month, we use Asana to collect newsletter content in one place. When it's time to write, I export that content and have Claude review it and draft an outline. Once the outline is set, I use a custom-built Claude skill to write the newsletter with me, one section at a time.
 
 ## Producing audiobooks with Adobe Podcast
 
 A walkthrough of recording, editing, and exporting audio with Adobe Podcast, and how the same workflow can turn written content into accessible audio formats.
-
-*A fuller write-up of this session is coming soon.*
