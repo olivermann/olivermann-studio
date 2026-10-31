@@ -32,7 +32,7 @@ const blog = defineCollection({
         skillsTags: z.array(z.string()).default([]),
         heroImage: image().optional(),
         heroImageAlt: z.string().optional(),
-        heroCaption: z.string().optional(), // optional visible caption under the hero image
+        heroCaption: z.string().optional(), // optional visible caption under the hero image (simple HTML links allowed, e.g. photo credits)
         heroVideoId: z.string().optional(),
         excerpt: z.string().min(1),
         featured: z.boolean().default(false),
