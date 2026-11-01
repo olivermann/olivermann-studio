@@ -12,7 +12,7 @@ excerpt: "A step-by-step framework for building and launching a website with Cla
 
 <div class="long-post">
 
-On October 9, 2026, I led a virtual Lunch and Learn for [Innovation UBC](https://www.linkedin.com/company/innovationubc/) called Building a Simple Website with AI. It became Innovation UBC's most popular Lunch and Learn of 2026, with the most registrations and the highest attendance. You can read about the event on its [event page](/blog/ai-portfolio-website-lunch-and-learn/).
+On October 9, 2026, I led a virtual Lunch and Learn for Innovation UBC called Building a Simple Website with AI. It became Innovation UBC's most popular Lunch and Learn of 2026, with the most registrations and the highest attendance. You can read about the event on its [event page](/blog/ai-portfolio-website-lunch-and-learn/).
 
 This post is the full written version of that workshop. It shows how I built the website you are on right now, olivermann.studio, with Claude over a single weekend. You will find my four-stage framework, every prompt I used, and a copy of my project brief.
 
