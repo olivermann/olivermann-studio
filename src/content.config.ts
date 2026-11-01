@@ -41,6 +41,7 @@ const blog = defineCollection({
         // The note uses the post's own date as the original publication date.
         originalUrl: z.string().url().optional(),
         originalSite: z.string().optional(), // display name, e.g. "communityengagement.ubc.ca"
+        originalHideDate: z.boolean().default(false), // true: the origin note omits the date (used for republished event pages)
         externalLink: z
           .string()
           .url()
