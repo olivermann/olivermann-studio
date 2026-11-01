@@ -73,8 +73,8 @@ const byline = ['Oliver Mann', d.role, longDate(d.date)].filter(Boolean).join(' 
   {d.originalUrl && (
     <div class="origin-note">
       <p>
-        This story was originally published on{' '}
-        <a href={d.originalUrl}>{d.originalSite ?? new URL(d.originalUrl).hostname}</a> on {longDate(d.date)}.
+        {d.originalHideDate ? 'This page' : 'This story'} was originally published on{' '}
+        <a href={d.originalUrl}>{d.originalSite ?? new URL(d.originalUrl).hostname}</a>{d.originalHideDate ? '.' : ` on ${longDate(d.date)}.`}
       </p>
     </div>
   )}
