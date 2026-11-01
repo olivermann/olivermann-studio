@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Photography · Oliver Mann</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FFFFFF; --text: #111111; --muted: #6b6b6b; --line: rgba(0,0,0,0.12);
+    --sans: "Inter", -apple-system, sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: var(--sans); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  a { color: var(--text); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  header { display: flex; justify-content: space-between; align-items: baseline; padding: 36px clamp(24px, 6vw, 80px) 20px; }
+  .wordmark { font-weight: 800; font-size: 22px; letter-spacing: -0.01em; }
+  nav { display: flex; gap: clamp(16px, 3vw, 36px); }
+  nav a { font-size: 12px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+  nav a.active { color: var(--text); border-bottom: 2px solid var(--text); padding-bottom: 3px; }
+  nav a:hover { color: var(--text); text-decoration: none; }
+
+  .intro { text-align: center; max-width: 640px; margin: clamp(28px, 6vh, 56px) auto 0; padding: 0 24px; }
+  .intro h1 { font-weight: 800; font-size: clamp(32px, 4.6vw, 46px); letter-spacing: -0.02em; }
+  .intro p { margin-top: 16px; font-size: 14.5px; color: var(--muted); line-height: 1.75; }
+
+  .filters { display: flex; justify-content: center; gap: clamp(20px, 4vw, 44px); margin: 40px 0 48px; }
+  .filters button { background: none; border: none; cursor: pointer; font-family: var(--sans); font-size: 12px; font-weight: 500; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); padding: 6px 2px; border-bottom: 2px solid transparent; transition: color 0.2s; }
+  .filters button:hover { color: var(--text); }
+  .filters button.active { color: var(--text); border-bottom-color: var(--text); font-weight: 700; }
+
+  .grid { columns: 3; column-gap: 28px; padding: 0 clamp(24px, 6vw, 80px); max-width: 1400px; margin: 0 auto; }
+  @media (max-width: 900px) { .grid { columns: 2; column-gap: 20px; } }
+  @media (max-width: 560px) { .grid { columns: 1; } }
+  .grid figure { break-inside: avoid; margin: 0 0 28px; cursor: zoom-in; position: relative; overflow: hidden; }
+  .grid figure img { width: 100%; height: auto; display: block; transition: transform 0.4s ease, opacity 0.4s ease; }
+  .grid figure:hover img { transform: scale(1.015); }
+  .grid figure.hidden { display: none; }
+
+  .fade-in { opacity: 0; transform: translateY(14px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .fade-in.visible { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) {
+    .fade-in { opacity: 1; transform: none; transition: none; }
+    .grid figure:hover img { transform: none; }
+  }
+
+  .see-more { text-align: center; font-size: 14px; color: var(--muted); margin: 56px 24px 0; }
+  .see-more a { text-decoration: underline; }
+
+  footer { margin-top: 96px; padding: 44px clamp(24px, 6vw, 80px) 52px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 16px 40px; justify-content: space-between; font-size: 13px; color: var(--muted); }
+  footer a { color: var(--muted); }
+  footer a:hover { color: var(--text); }
+  footer .social { display: flex; gap: 24px; }
+
+  /* Lightbox */
+  .lightbox { position: fixed; inset: 0; background: rgba(10, 10, 10, 0.95); display: none; z-index: 100; }
+  .lightbox.open { display: block; }
+  .lightbox-stage { position: absolute; inset: 56px 88px 92px; display: flex; align-items: center; justify-content: center; }
+  .lightbox-stage img { max-width: 100%; max-height: 100%; display: block; box-shadow: 0 12px 60px rgba(0,0,0,0.5); }
+  .lightbox-caption { position: absolute; left: 0; right: 0; bottom: 28px; text-align: center; color: rgba(255,255,255,0.85); font-size: 13px; padding: 0 24px; }
+  .lightbox-caption .album-link { display: inline-block; margin-left: 14px; color: #fff; text-decoration: underline; letter-spacing: 0.04em; }
+  .lightbox button { position: absolute; background: none; border: none; cursor: pointer; color: rgba(255,255,255,0.75); font-size: 30px; line-height: 1; padding: 16px; transition: color 0.2s; }
+  .lightbox button:hover { color: #fff; }
+  .lb-close { top: 12px; right: 16px; }
+  .lb-prev { left: 8px; top: 50%; transform: translateY(-50%); }
+  .lb-next { right: 8px; top: 50%; transform: translateY(-50%); }
+  @media (max-width: 700px) {
+    .lightbox-stage { inset: 48px 12px 104px; }
+    .lb-prev, .lb-next { top: auto; bottom: 44px; transform: none; }
+    .lb-prev { left: 20%; } .lb-next { right: 20%; }
+    .lightbox-caption { bottom: 8px; }
+    .lightbox-caption .album-link { display: block; margin: 4px 0 0; }
+  }
+</style>
+</head>
+<body>
+<div style="background:#f1f1f1;border-bottom:1px solid #d9d9d9;padding:10px 20px;font:500 13px/1.4 Inter,-apple-system,sans-serif;color:#444;text-align:center">This is an early mockup of olivermann.studio, shared as an example. <a href="/blog/how-i-built-my-website-with-ai/" style="color:#111;text-decoration:underline">Return to the post</a></div>
+
+<header>
+  <a class="wordmark" href="index.html">Oliver Mann</a>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="photography.html" class="active">Photography</a>
+    <a href="resume.html">Resume</a>
+    <a href="blog.html">Blog</a>
+  </nav>
+</header>
+
+<section class="intro">
+  <h1>Photography</h1>
+</section>
+
+<div class="filters" role="tablist" aria-label="Filter photos">
+  <button class="active" data-filter="all" role="tab" aria-selected="true">All</button>
+  <button data-filter="portrait" role="tab" aria-selected="false">Portraits</button>
+  <button data-filter="event" role="tab" aria-selected="false">Events</button>
+</div>
+
+<div class="grid" id="grid"></div>
+
+<p class="see-more">Want to see more from a shoot? <a href="mailto:hello@olivermann.studio">Get in touch</a></p>
+
+<footer>
+  <a href="mailto:hello@olivermann.studio">hello@olivermann.studio</a>
+  <div class="social">
+    <a href="https://www.linkedin.com/in/oliver-e-mann/">LinkedIn</a>
+    <a href="https://www.instagram.com/oliver.mann.photography/">Instagram</a>
+  </div>
+  <span>&copy; Oliver Mann 2026</span>
+</footer>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo viewer">
+  <button class="lb-close" aria-label="Close">&times;</button>
+  <button class="lb-prev" aria-label="Previous photo">&#8249;</button>
+  <button class="lb-next" aria-label="Next photo">&#8250;</button>
+  <div class="lightbox-stage"><img id="lb-img" src="" alt=""></div>
+  <div class="lightbox-caption" id="lb-caption"></div>
+</div>
+
+<script>
+// Mirrors the future src/data/photos.yaml. Ordered by date taken, newest first.
+// Portrait dates from EXIF. Event dates confirmed by Oliver 2026-07-11.
+const P = "images/photography/portraits/";
+const E = "images/photography/events/";
+const photos = [
+  // ---- Events (2026, newest first) ----
+  { src: E + "Cohort Day June 2026 - Venture Founder Session 16.jpg", alt: "Two presenters sharing a laugh at the front of the room during Venture Founder Session 16", category: "event",
+    date: "2026-06-25", caption: "Cohort Day June 2026: Venture Founder Session 16",
+    flickrAlbum: "https://www.flickr.com/photos/163166916@N03/albums/72177720334415383/" },
+  { src: E + "Web Summit 2026 - Climate Innovation Zone.jpg", alt: "Panel discussion on stage in the Climate Innovation Zone at Web Summit 2026", category: "event",
+    date: "2026-05-14", caption: "Web Summit 2026: Climate Innovation Zone",
+    flickrAlbum: "https://www.flickr.com/photos/163166916@N03/albums/72177720333804314/" },
+  { src: E + "C51 Mentor Social and Best Practices Session - February 2026.jpg", alt: "Guests laughing in conversation at the C51 Mentor Social and Best Practices Session", category: "event",
+    date: "2026-02-12", caption: "C51 Mentor Social and Best Practices Session, February 2026",
+    flickrAlbum: "https://www.flickr.com/photos/163166916@N03/albums/72177720333280800/" },
+  { src: E + "C50 Cohort Day - February 2026.jpg", alt: "Attendees networking in a bright lobby at C50 Cohort Day", category: "event",
+    date: "2026-02-04", caption: "C50 Cohort Day, February 2026",
+    flickrAlbum: "https://www.flickr.com/photos/163166916@N03/albums/72177720333287721/" },
+  { src: E + "2026 Venture Founder C50 Session 15.jpg", alt: "Presenter with arms raised as audience members raise their hands at Venture Founder C50 Session 15", category: "event",
+    date: "2026-01-29", caption: "2026 Venture Founder C50 Session 15",
+    flickrAlbum: "https://www.flickr.com/photos/163166916@N03/albums/72177720331800821/" },
+  { src: E + "2026 Venture Founder C51 Orientation.jpg", alt: "Participants with name tags smiling during the 2026 Venture Founder C51 Orientation", category: "event",
+    date: "2026-01-29", caption: "2026 Venture Founder C51 Orientation",
+    flickrAlbum: "https://www.flickr.com/photos/163166916@N03/albums/72177720331790565/" },
+
+  // ---- Portraits (EXIF dates, newest first) ----
+  { src: P + "IMG_9120-Edit.jpg", alt: "Model in a red jacket reclining on pavement beside a chain-link fence", category: "portrait", date: "2017-05-06" },
+  { src: P + "IMG_8920-Edit.jpg", alt: "Model pulling a leather jacket overhead against a deep blue sky on an industrial street", category: "portrait", date: "2017-05-06" },
+  { src: P + "IMG_6668-Edit.jpg", alt: "Black and white portrait of a model exhaling smoke, hair tied up", category: "portrait", date: "2017-03-26" },
+  { src: P + "IMG_6560-Edit.jpg", alt: "Black and white studio portrait of a model with long curls, jacket open", category: "portrait", date: "2017-03-26" },
+  { src: P + "02.25.17_The-Boundary_Donoh-10-of-10 (1).jpg", alt: "Model wearing a multicoloured fur hat with sequins beneath one eye", category: "portrait", date: "2017-02-25" },
+  { src: P + "02.25.17_The-Boundary_Donoh-3-of-10 (1).jpg", alt: "Model reclining in tall dried grass in denim, photographed for The Boundary", category: "portrait", date: "2017-02-25" },
+  { src: P + "02.25.17_The-Boundary_Donoh-1-of-10 (1).jpg", alt: "Model in a patterned blue jacket and grey hoodie photographed against the sea and sky", category: "portrait", date: "2017-02-25" },
+  { src: P + "02.18.17-Terrick-Photoshoot_hires-5 (1).jpg", alt: "Portrait of a red-haired model gripping the collar of an olive bomber jacket", category: "portrait", date: "2017-02-18" },
+  { src: P + "BeyondExpectation_OliverMann_HUFMag_08.jpg", alt: "HUF Magazine editorial close-up: model with sequin details above the eye, wearing a leather jacket", category: "portrait", date: "2017-02-12" },
+  { src: P + "BeyondExpectation_OliverMann_HUFMag_07.jpg", alt: "HUF Magazine editorial: model in a shearling-collared leather jacket standing in winter grassland", category: "portrait", date: "2017-02-12" },
+  { src: P + "BeyondExpectation_OliverMann_HUFMag_03.jpg", alt: "HUF Magazine editorial page: model in a flat cap and floral bow tie under a blue sky", category: "portrait", date: "2017-02-12" },
+  { src: P + "02.07.17-Smallville-Editorial_Oliver-Mann-Photography-9-of-10.jpg", alt: "Model in a bomber jacket patched with international flags, standing before a snow-covered cabin", category: "portrait", date: "2017-02-07" },
+  { src: P + "02.07.17-Smallville-Editorial_Oliver-Mann-Photography-1-of-10.jpg", alt: "Portrait of a model in round glasses and a plaid scarf gazing upward against a blue sky", category: "portrait", date: "2017-02-07" },
+  { src: P + "01.20.17-Ding-Deva-Editorial-Edits-3-of-13.jpg", alt: "Editorial portrait of two models posed against a blue playground structure by the waterfront", category: "portrait", date: "2017-01-20" },
+  { src: P + "01.20.17-Ding-Deva-Editorial-Edits-5-of-13.jpg", alt: "Sunlit portrait of a model in a grey tweed coat against a concrete wall", category: "portrait", date: "2017-01-20" },
+  { src: P + "IMG_2097.jpg", alt: "Model in a black beanie crouched among tall dried grasses in denim", category: "portrait", date: "2017-01-14" },
+  { src: P + "IMG_7791-Edit-Edit.jpg", alt: "High-contrast black and white street portrait of a model with a dark fringe", category: "portrait", date: "2016-10-05" },
+];
+
+// ---------- Render grid ----------
+const grid = document.getElementById("grid");
+photos.forEach((p, i) => {
+  const fig = document.createElement("figure");
+  fig.className = "fade-in";
+  fig.dataset.category = p.category;
+  fig.dataset.index = i;
+  const img = document.createElement("img");
+  img.src = encodeURI(p.src);
+  img.alt = p.alt;
+  img.loading = "lazy";
+  fig.appendChild(img);
+  fig.addEventListener("click", () => openLightbox(i));
+  grid.appendChild(fig);
+});
+
+// ---------- Entrance fade ----------
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("visible"); io.unobserve(e.target); } });
+}, { rootMargin: "80px" });
+document.querySelectorAll(".fade-in").forEach(el => io.observe(el));
+
+// ---------- Filters ----------
+let currentFilter = "all";
+document.querySelectorAll(".filters button").forEach(btn => {
+  btn.addEventListener("click", () => {
+    currentFilter = btn.dataset.filter;
+    document.querySelectorAll(".filters button").forEach(b => {
+      b.classList.toggle("active", b === btn);
+      b.setAttribute("aria-selected", b === btn ? "true" : "false");
+    });
+    document.querySelectorAll(".grid figure").forEach(fig => {
+      fig.classList.toggle("hidden", currentFilter !== "all" && fig.dataset.category !== currentFilter);
+    });
+  });
+});
+
+// ---------- Lightbox ----------
+const lightbox = document.getElementById("lightbox");
+const lbImg = document.getElementById("lb-img");
+const lbCaption = document.getElementById("lb-caption");
+let lbIndex = 0;
+
+function filteredIndices() {
+  return photos.map((p, i) => i).filter(i => currentFilter === "all" || photos[i].category === currentFilter);
+}
+function openLightbox(i) {
+  lbIndex = i;
+  showPhoto();
+  lightbox.classList.add("open");
+  document.body.style.overflow = "hidden";
+}
+function closeLightbox() {
+  lightbox.classList.remove("open");
+  document.body.style.overflow = "";
+}
+function showPhoto() {
+  const p = photos[lbIndex];
+  lbImg.src = encodeURI(p.src);
+  lbImg.alt = p.alt;
+  let html = p.caption ? p.caption : "";
+  if (p.flickrAlbum) {
+    html += '<a class="album-link" href="' + p.flickrAlbum + '" target="_blank" rel="noopener">View full album on Flickr &#8599;</a>';
+  }
+  lbCaption.innerHTML = html;
+}
+function step(dir) {
+  const idx = filteredIndices();
+  const pos = idx.indexOf(lbIndex);
+  lbIndex = idx[(pos + dir + idx.length) % idx.length];
+  showPhoto();
+}
+lightbox.querySelector(".lb-close").addEventListener("click", closeLightbox);
+lightbox.querySelector(".lb-prev").addEventListener("click", e => { e.stopPropagation(); step(-1); });
+lightbox.querySelector(".lb-next").addEventListener("click", e => { e.stopPropagation(); step(1); });
+lightbox.addEventListener("click", e => { if (e.target === lightbox || e.target.classList.contains("lightbox-stage")) closeLightbox(); });
+document.addEventListener("keydown", e => {
+  if (!lightbox.classList.contains("open")) return;
+  if (e.key === "Escape") closeLightbox();
+  if (e.key === "ArrowLeft") step(-1);
+  if (e.key === "ArrowRight") step(1);
+});
+</script>
+</body>
+</html>

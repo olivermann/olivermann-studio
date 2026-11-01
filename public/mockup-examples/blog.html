@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="robots" content="noindex, nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Blog · Oliver Mann</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #FFFFFF; --text: #111111; --muted: #6b6b6b; --line: rgba(0,0,0,0.12);
+    --ph: #ECECEC; --ph-text: #9a9a9a;
+    --sans: "Inter", -apple-system, sans-serif;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--text); font-family: var(--sans); font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+  a { color: var(--text); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  header { display: flex; justify-content: space-between; align-items: baseline; padding: 36px clamp(24px, 6vw, 80px) 20px; }
+  .wordmark { font-weight: 800; font-size: 22px; letter-spacing: -0.01em; }
+  nav { display: flex; gap: clamp(16px, 3vw, 36px); }
+  nav a { font-size: 12px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+  nav a.active { color: var(--text); border-bottom: 2px solid var(--text); padding-bottom: 3px; }
+  nav a:hover { color: var(--text); text-decoration: none; }
+  main { max-width: 900px; margin: 0 auto; padding: 0 clamp(24px, 6vw, 80px); }
+  .intro { text-align: center; margin: clamp(28px, 6vh, 56px) auto 0; }
+  .intro h1 { font-weight: 800; font-size: clamp(32px, 4.6vw, 46px); letter-spacing: -0.02em; }
+  .intro p { margin-top: 14px; font-size: 14.5px; color: var(--muted); }
+  .filters { display: flex; justify-content: center; flex-wrap: wrap; gap: clamp(14px, 2.5vw, 32px); margin: 36px 0 8px; }
+  .filters button { background: none; border: none; cursor: pointer; font-family: var(--sans); font-size: 12px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); padding: 6px 2px; border-bottom: 2px solid transparent; transition: color 0.2s; }
+  .filters button:hover { color: var(--text); }
+  .filters button.active { color: var(--text); border-bottom-color: var(--text); font-weight: 700; }
+  .posts { margin-top: 24px; }
+  .post { display: grid; grid-template-columns: 190px 1fr; gap: 22px; align-items: center; color: var(--text); padding: 22px 0; border-top: 1px solid var(--line); min-height: 164px; }
+  .posts .post:last-child { border-bottom: 1px solid var(--line); }
+  .post.hidden { display: none; }
+  .post:hover { text-decoration: none; }
+  .post:hover h2 { text-decoration: underline; }
+  .post .thumb { aspect-ratio: 16 / 10; background: var(--ph); display: flex; align-items: center; justify-content: center; color: var(--ph-text); font-size: 10px; letter-spacing: 0.08em; text-transform: uppercase; text-align: center; overflow: hidden; }
+  .post .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .post .meta { display: flex; gap: 12px; align-items: baseline; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+  .post .meta .date { font-weight: 400; letter-spacing: 0.04em; text-transform: none; }
+  .post .meta .out { font-size: 12px; }
+  .post h2 { font-weight: 700; font-size: clamp(17px, 2.2vw, 21px); line-height: 1.3; margin-top: 8px; letter-spacing: -0.01em; }
+  .post p { margin-top: 8px; font-size: 13.5px; color: var(--muted); line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  @media (max-width: 620px) { .post { grid-template-columns: 110px 1fr; gap: 16px; min-height: 0; } .post p { display: none; } }
+  .fade-in { opacity: 0; transform: translateY(14px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .fade-in.visible { opacity: 1; transform: none; }
+  @media (prefers-reduced-motion: reduce) { .fade-in { opacity: 1; transform: none; transition: none; } }
+  footer { margin-top: 96px; padding: 44px clamp(24px, 6vw, 80px) 52px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 16px 40px; justify-content: space-between; font-size: 13px; color: var(--muted); }
+  footer a { color: var(--muted); }
+  footer a:hover { color: var(--text); }
+  footer .social { display: flex; gap: 24px; }
+</style>
+</head>
+<body>
+<div style="background:#f1f1f1;border-bottom:1px solid #d9d9d9;padding:10px 20px;font:500 13px/1.4 Inter,-apple-system,sans-serif;color:#444;text-align:center">This is an early mockup of olivermann.studio, shared as an example. <a href="/blog/how-i-built-my-website-with-ai/" style="color:#111;text-decoration:underline">Return to the post</a></div>
+
+<header>
+  <a class="wordmark" href="index.html">Oliver Mann</a>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="photography.html">Photography</a>
+    <a href="resume.html">Resume</a>
+    <a href="blog.html" class="active">Blog</a>
+  </nav>
+</header>
+
+<main>
+  <div class="intro">
+    <h1>Blog</h1>
+    <p>Case studies and published work. Pieces marked with an arrow link out to where they were originally published.</p>
+  </div>
+
+  <div class="filters" role="tablist" aria-label="Filter posts">
+    <button class="active" data-filter="all">All</button>
+    <button data-filter="case-study">Case Studies</button>
+    <button data-filter="writing">Writing</button>
+    <button data-filter="video">Video</button>
+    <button data-filter="podcast">Podcast</button>
+    <button data-filter="research">Research &amp; Indigenous Engagement</button>
+    <button data-filter="speaking">Speaking &amp; Leadership</button>
+  </div>
+
+  <div class="posts" id="posts"></div>
+</main>
+
+<footer>
+  <a href="mailto:hello@olivermann.studio">hello@olivermann.studio</a>
+  <div class="social">
+    <a href="https://www.linkedin.com/in/oliver-e-mann/">LinkedIn</a>
+    <a href="https://www.instagram.com/oliver.mann.photography/">Instagram</a>
+  </div>
+  <span>&copy; Oliver Mann 2026</span>
+</footer>
+
+<script>
+// Full mixed collection, reverse chronological. types (array) drives the filter
+// tabs — a post can belong to more than one. tag is the short label shown on
+// the row (joined with " · " when a post has multiple types). ext = links out.
+// Speaking dates shown as years only are approximate; Oliver to confirm.
+// Note: the two "Reciprocal Storytelling in Community-Based and Indigenous-Led
+// Research" entries that used to exist here (one research, one a duplicate
+// "Panel" speaking listing pointing at the same URL) were merged into one
+// research + podcast post on 2026-07-12.
+const posts = [
+  { types: ["research"], tag: "Research", date: "Jul 12, 2026", title: "Ethical, Equity-Driven Storytelling in Institutional Communications", href: "blog-post.html",
+    excerpt: "Frameworks for ethical, equity-driven storytelling developed during my MA in Professional Communications at Royal Roads University, advocating for Indigenous-led storytelling and decolonizing communication practices." },
+  { types: ["case-study"], tag: "Case Study", date: "Jul 10, 2026", title: "Venture Founder Program Recruitment Campaign", href: "blog-post.html",
+    excerpt: "A multi-channel recruitment campaign built to grow applications to UBC's flagship venture-building program." },
+  { types: ["case-study"], tag: "Case Study", date: "Jul 8, 2026", title: "Building Cross-Channel Analytics Dashboards", href: "blog-post.html",
+    excerpt: "One dashboard tracking performance across website, email, LinkedIn, and Instagram, turning scattered data into a clear story." },
+  { types: ["writing"], tag: "Writing", date: "Jul 6, 2026", title: "How UBC's New Express License Is Fast-Tracking Spin-Offs", href: "https://innovation.ubc.ca/stories/how-ubcs-new-express-license-fast-tracking-spin-offs", ext: true, img: "images/blog/hero-express-license.jpg",
+    excerpt: "A breakdown of UBC's refreshed Express License Agreement, the standardized framework cutting legal costs and timelines for spin-offs." },
+  { types: ["case-study"], tag: "Case Study", date: "Jul 2, 2026", title: "Revamping Innovation UBC's Monthly Newsletters", href: "blog-post.html",
+    excerpt: "Rebuilding the newsletter program from scratch: strategy, design, and measurable audience growth." },
+  { types: ["writing"], tag: "Writing", date: "Jun 4, 2026", title: "Leadership Q&A: Innovation UBC's New Associate Director, Innovation Partnerships", href: "https://innovation.ubc.ca/stories/leadership-qa-innovation-ubcs-new-associate-director-innovation-partnerships", ext: true, img: "images/blog/hero-leadership-qa-ian-bell.jpg",
+    excerpt: "A Q&A with Ian Bell on stepping into his new role and where he sees UBC's biggest partnership opportunities." },
+  { types: ["speaking"], tag: "Speaking", date: "Jun 3, 2026", title: "How Innovation UBC Staff Are Using AI, Innovation UBC Lunch and Learn", href: "blog-post.html", img: "images/blog/hero-ai-lunch-and-learn.jpeg",
+    excerpt: "Organizer and presenter. Two use cases: accelerating the monthly newsletter with Asana and a custom Claude skill, and producing audiobooks with Adobe Podcast." },
+  { types: ["writing"], tag: "Writing", date: "May 29, 2026", title: "Eight Founders on Building Ventures After Venture Founder Fall 2025", href: "https://innovation.ubc.ca/stories/may-05-2026/meet-founders-coming-out-venture-founder-fall-2025-cohort", ext: true, img: "images/blog/hero-venture-founder-fall25-founders.jpg",
+    excerpt: "Alumni from the program's Fall 2025 cohort on tackling cancer, CO2 emissions, and the rising cost of AI computing." },
+  { types: ["writing"], tag: "Writing", date: "Mar 17, 2026", title: "12 UBC Ventures Take the Stage at the 2026 Investor Showcase", href: "https://innovation.ubc.ca/news/march-03-2026/meet-12-ubc-ventures-presenting-innovation-ubcs-2026-investor-showcase", ext: true, img: "images/blog/hero-investor-showcase-2026.jpeg",
+    excerpt: "This year's showcase featured pitches from digital therapeutics, medical devices, AI, and clean materials ventures." },
+  { types: ["writing"], tag: "Writing", date: "Feb 10, 2026", title: "10 UBC Spin-Offs Join HATCH Venture Builder's Winter 2026 Cohort", href: "https://innovation.ubc.ca/news/february-02-2026/meet-ventures-joining-hatch-venture-builder-winter-2026", ext: true, img: "images/blog/hero-hatch-winter-2026.jpg",
+    excerpt: "New ventures in climate tech, healthcare, and aerospace kick off the next HATCH cohort." },
+  { types: ["writing"], tag: "Writing", date: "Feb 9, 2026", title: "28 New Ventures Join the Venture Founder Program's 51st Cohort", href: "https://innovation.ubc.ca/news/february-02-2026/meet-51st-venture-founder-cohort", ext: true, img: "images/blog/hero-venture-founder-cohort-51.jpg",
+    excerpt: "The latest cohort spans AI, biotech, healthcare, and climate tech, 13 years into UBC's flagship venture-building program." },
+  { types: ["podcast"], tag: "Podcast", date: "Nov 25, 2025", title: "Stories of Partnership: Community Veterinary Outreach and UBC", href: "https://communityengagement.ubc.ca/news/community-veterinary-outreach-and-ubc-improve-health-access-in-the-dtes-for-people-and-pets/", ext: true, img: "images/blog/hero-community-veterinary-outreach.jpg",
+    excerpt: "How Community Veterinary Outreach and UBC use the bond between people and their pets to improve health access in the Downtown Eastside." },
+  { types: ["podcast", "indigenous-engagement"], tag: "Podcast · Indigenous Engagement", date: "Nov 20, 2025", title: "How the Nuxalk Nation Is Working with UBC's Museum of Anthropology to Host the First-Ever Exhibit of Their People", href: "https://communityengagement.ubc.ca/news/how-the-nuxalk-nation-is-working-with-ubcs-museum-of-anthropology-to-host-the-first-ever-exhibit-of-their-people/", ext: true, img: "images/blog/hero-nuxalk-moa-exhibit.jpg",
+    excerpt: "A podcast with the curators of Nuxalk Strong, the first dedicated museum exhibition of the Nuxalk Nation, on reclaiming belongings and rebuilding the relationship between museums and Nations." },
+  { types: ["podcast"], tag: "Podcast", date: "Nov 12, 2025", title: "UBC Okanagan Students and a Peachland Conservation Group Are Using Bats and Bugs to Build Community Conservation", href: "https://communityengagement.ubc.ca/news/ubc-okanagan-peachland-beeps-bat-survey-project/", ext: true, img: "images/blog/hero-peachland-bats-bugs.jpg",
+    excerpt: "A conversation with BEEPS and a UBC Okanagan student on their bat and insect survey project in Peachland." },
+  { types: ["speaking", "indigenous-engagement"], tag: "Speaking · Indigenous Engagement", date: "Sep 29, 2025", title: "Ceremony and Safety in Indigenous Events, and the State of Indigenous Engagement in Canada", href: "https://communityengagement.ubc.ca/events/september-29-presentation-to-cce-canada/", ext: true, img: "images/blog/hero-cce-canada-ceremony-safety.jpg",
+    excerpt: "Moderator. Presentation to Community Campus Engage Canada, with Derek Thompson, Director of Indigenous Engagement, UBC Faculty of Medicine." },
+  { types: ["speaking", "research", "indigenous-engagement"], tag: "Speaking · Research · Indigenous Engagement", date: "Aug 21, 2025", title: "Challenges to Reciprocal Storytelling in Indigenous Engagement", href: "https://communityengagement.ubc.ca/events/presentation-to-ric-challenges-to-reciprocal-storytelling-in-indigenous-engagement/", ext: true, img: "images/blog/hero-ric-reciprocal-storytelling.jpg",
+    excerpt: "Speaker. Presentation to Research Impact Canada." },
+  { types: ["research", "podcast", "indigenous-engagement"], tag: "Research · Podcast · Indigenous Engagement", date: "Jul 21, 2025", title: "Reciprocal Storytelling in Community-Based and Indigenous-Led Research", href: "https://communityengagement.ubc.ca/news/reciprocal-storytelling-in-community-based-and-indigenous-led-research/", ext: true, img: "images/blog/hero-reciprocal-storytelling-article.jpg",
+    excerpt: "A podcast on the ethics and responsibilities of storytelling in community-based and Indigenous-led research, and how it supports truth, reciprocity, and lasting partnerships." },
+  { types: ["podcast"], tag: "Podcast", date: "Jul 21, 2025", title: "Be the Change Earth Alliance, False Creek Friends and UBC Sustainability Hub", href: "https://communityengagement.ubc.ca/news/be-the-change-earth-alliance-false-creek-friends-and-ubc-sustainability-hub/", ext: true, img: "images/blog/hero-sustainability-hub.jpg",
+    excerpt: "How three community-university partners sustain climate action work through care and collaboration." },
+  { types: ["podcast"], tag: "Podcast", date: "Jul 21, 2025", title: "Community-Engaged Research Ask Me Anything", href: "https://communityengagement.ubc.ca/news/ucommunity-engaged-research-ask-me-anything/", ext: true, img: "images/blog/hero-community-engaged-research-ama.jpg",
+    excerpt: "A live AMA from the 2025 UBC Partnering in Research Conference on what community-led research looks like in practice." },
+  { types: ["speaking"], tag: "Speaking", date: "Jun 9, 2025", title: "\"How to Explain Your Community Engagement Work to People Who Don't Get It\" (CCEC)", href: "https://communityengagement.ubc.ca/events/june-9-ccec-session/", ext: true, img: "images/blog/hero-ccec-explain-engagement.jpg",
+    excerpt: "Co-facilitator. Community Campus Engage Canada session." },
+  { types: ["podcast"], tag: "Podcast", date: "Apr 1, 2025", title: "Challenges in Partnered Research: Achieving Sustainability in Engaged Research", href: "https://communityengagement.ubc.ca/news/pir-achieving-sustainability-in-engaged-research/", ext: true, img: "images/blog/hero-partnered-research-sustainability.jpg",
+    excerpt: "A conversation with Dr. Henry Yu and Dr. Vicky Bungay on what sustains community-engaged research over the long term." },
+  { types: ["speaking"], tag: "Speaking", date: "Mar 11, 2025", title: "\"How to Explain Your Community Engagement Work to People Who Don't Get It\" (UBC CEN)", href: "https://communityengagement.ubc.ca/events/2025-march-cen-session/", ext: true, img: "images/blog/hero-cen-explain-engagement.jpg",
+    excerpt: "Co-facilitator. UBC Community Engagement Network session." },
+  { types: ["podcast", "indigenous-engagement"], tag: "Podcast · Indigenous Engagement", date: "Jan 2, 2025", title: "Children of the Taku Society and UBCO Partner to Document Language Reclamation and Resilience", href: "https://communityengagement.ubc.ca/news/children-of-the-taku-and-ubco-partner-to-document-language-reclamation-and-resilience/", ext: true, img: "images/blog/hero-taku-language-reclamation.jpeg",
+    excerpt: "A podcast with the Children of the Taku Society and a UBC Okanagan professor on documenting language loss and revitalization, and how it strengthens cultural identity and resilience." },
+  { types: ["podcast", "indigenous-engagement"], tag: "Podcast · Indigenous Engagement", date: "Sep 18, 2024", title: "From Oral Tradition to Comics", href: "https://communityengagement.ubc.ca/news/from-oral-tradition-to-comics/", ext: true, img: "images/blog/hero-oral-tradition-comics.jpg",
+    excerpt: "A podcast and Q&A with Homalco Nation and UBC's Comic Studies Cluster on turning archival Elder recordings into a graphic novel that keeps the Homalco language and stories alive for a new generation." },
+  { types: ["podcast", "indigenous-engagement"], tag: "Podcast · Indigenous Engagement", date: "Jan 5, 2024", title: "Breathing Life Back into Their Language: A Collaborative E-Dictionary Project with Klahoose, Tla'amin, Homalco, and K'omoks Nations", href: "https://communityengagement.ubc.ca/news/a-collaborative-e-dictionary-project-with-klahoose-tlaamin-homalco-and-komoks-nations/", ext: true, img: "images/blog/hero-e-dictionary-project.jpg",
+    excerpt: "A podcast with Tla'amin Nation and a UBC linguist on building a shared e-dictionary for ʔayʔaǐuθəm, the language of four sister Nations with fewer than 47 fluent speakers remaining." },
+  { types: ["video"], tag: "Video", date: "Jun 1, 2020", title: "Your First Year in UBC Arts: Coordinated Arts Program", href: "https://youtu.be/jC757dYzZ7s", ext: true, yt: "jC757dYzZ7s",
+    excerpt: "First-year Arts student Aida Sanjush shares her experience in the Coordinated Arts Program's Global Citizens stream." },
+  { types: ["video"], tag: "Video", date: "Jul 26, 2019", title: "A Queer Century, 1869-1969: A Rare Books Exhibit at UBC", href: "https://youtu.be/XCVniWJHD-Y", ext: true, yt: "XCVniWJHD-Y",
+    excerpt: "A UBC Rare Books and Special Collections exhibit tracing shifting perceptions of gender and sexuality from 1869 to 1969." },
+  { types: ["video"], tag: "Video", date: "Jan 3, 2019", title: "Why Studying Manga and Anime Matters: Faculty Spotlight with Dr. Sharalyn Orbaugh", href: "https://youtu.be/h8-3i-iDFGc", ext: true, yt: "h8-3i-iDFGc",
+    excerpt: "A faculty spotlight on Dr. Sharalyn Orbaugh, who teaches manga and anime at UBC and researches how stories shape identity." },
+];
+
+const wrap = document.getElementById("posts");
+posts.forEach(p => {
+  const a = document.createElement("a");
+  a.className = "post fade-in";
+  a.dataset.types = p.types.join(" ");
+  a.href = p.href;
+  if (p.ext) { a.target = "_blank"; a.rel = "noopener"; }
+  const thumb = p.yt
+    ? '<div class="thumb"><img src="https://img.youtube.com/vi/' + p.yt + '/hqdefault.jpg" alt="" loading="lazy"></div>'
+    : p.img
+    ? '<div class="thumb"><img src="' + p.img + '" alt="" loading="lazy"></div>'
+    : '<div class="thumb">Image to come</div>';
+  a.innerHTML = thumb + '<div>' +
+    '<div class="meta"><span>' + p.tag + '</span><span class="date">' + p.date + '</span>' +
+    (p.ext ? '<span class="out">&#8599;</span>' : '') + '</div>' +
+    '<h2>' + p.title + '</h2><p>' + p.excerpt + '</p></div>';
+  wrap.appendChild(a);
+});
+
+// Filters + hash deep-linking (#case-studies, #writing, #video, #podcast, #research, #speaking).
+// #storytelling still works as a combined writing+video+podcast view (used by the
+// home page "View more stories" link); it has no tab of its own.
+// A post can carry more than one type (see e.g. the "Speaking · Research" and
+// "Research · Podcast" entries above) and will show up under every matching tab.
+// The "Research & Indigenous Engagement" tab (filter value "research") is a
+// combined view: it also pulls in posts tagged "indigenous-engagement".
+// "indigenous-engagement" is not its own filter tab, just a secondary tag some
+// posts carry alongside their primary type.
+const hashMap = { "case-studies": "case-study", "writing": "writing", "video": "video", "podcast": "podcast", "research": "research", "speaking": "speaking", "storytelling": "storytelling" };
+const groups = { storytelling: ["writing", "video", "podcast"], research: ["indigenous-engagement"] };
+function applyFilter(f) {
+  document.querySelectorAll(".filters button").forEach(b => b.classList.toggle("active", b.dataset.filter === f));
+  const match = types => f === "all" || types.includes(f) || types.some(t => (groups[f] || []).includes(t));
+  document.querySelectorAll(".post").forEach(p => p.classList.toggle("hidden", !match(p.dataset.types.split(" "))));
+}
+document.querySelectorAll(".filters button").forEach(btn => {
+  btn.addEventListener("click", () => {
+    applyFilter(btn.dataset.filter);
+    const slug = Object.keys(hashMap).find(k => hashMap[k] === btn.dataset.filter);
+    history.replaceState(null, "", btn.dataset.filter === "all" ? location.pathname : "#" + slug);
+  });
+});
+const initial = hashMap[location.hash.replace("#", "")];
+if (initial) applyFilter(initial);
+
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add("visible"); io.unobserve(e.target); } });
+}, { rootMargin: "80px" });
+document.querySelectorAll(".fade-in").forEach(el => io.observe(el));
+</script>
+</body>
+</html>
