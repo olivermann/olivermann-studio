@@ -184,6 +184,22 @@ const byline = ['Oliver Mann', d.role, longDate(d.date)].filter(Boolean).join(' 
     .long-post table.summary th[scope="row"] { width: 100%; padding: 18px 0 2px; }
     .long-post table.summary td { padding: 4px 0 14px; }
   }
+
+  /* ---------- Prompt blocks and screenshots (any post: fenced code blocks and Markdown images) ----------
+     A fenced code block (```text) is wrapped by the script below in a "Prompt" bar with a Copy button.
+     The !important rules override the inline colours the code highlighter adds. */
+  .body .code-block { margin: 20px 0 28px; border: 1px solid var(--line); border-left: 3px solid var(--text); background: #F5F5F5; }
+  .body .code-bar { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 8px 10px 8px 18px; border-bottom: 1px solid var(--line); }
+  .body .code-label { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+  .body .copy-btn { font-family: var(--sans); font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 8px 16px; min-width: 84px; background: var(--text); color: #fff; border: 1px solid var(--text); border-radius: 2px; cursor: pointer; }
+  .body .copy-btn:hover { opacity: 0.85; }
+  .body .copy-btn:focus-visible { outline: 2px solid var(--text); outline-offset: 2px; }
+  .body .copy-btn.copied { background: #fff; color: var(--text); }
+  .body .code-block pre { margin: 0; padding: 18px 20px 20px; white-space: pre-wrap !important; overflow-wrap: anywhere; overflow: visible !important; font-family: var(--sans); font-size: 14.5px; line-height: 1.7; background: transparent !important; color: #1a1a1a !important; }
+  .body .code-block pre code, .body .code-block pre span { font: inherit; background: none; padding: 0; color: inherit !important; }
+  .body .long-post img { border: 1px solid var(--line); }
+  /* Tall, narrow screenshot (a list down the left side of a page): keep it from stretching to full width. */
+  .body .long-post img[src*="website-folder-on-github"] { max-width: 320px; }
 </style>
 
 <script>
@@ -201,4 +217,59 @@ const byline = ['Oliver Mann', d.role, longDate(d.date)].filter(Boolean).join(' 
     });
     void items;
   }
+
+  // Prompt blocks: every fenced code block in a post body gets a "Prompt" bar and a Copy button.
+  // Posts stay plain Markdown (a ```text block); this script does the rest.
+  document.querySelectorAll<HTMLPreElement>('.post-body pre').forEach((pre) => {
+    const wrap = document.createElement('div');
+    wrap.className = 'code-block';
+    const bar = document.createElement('div');
+    bar.className = 'code-bar';
+    const label = document.createElement('span');
+    label.className = 'code-label';
+    label.textContent = 'Prompt';
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'copy-btn';
+    btn.textContent = 'Copy';
+    btn.setAttribute('aria-label', 'Copy this prompt as plain text');
+    bar.appendChild(label);
+    bar.appendChild(btn);
+    pre.parentNode?.insertBefore(wrap, pre);
+    wrap.appendChild(bar);
+    wrap.appendChild(pre);
+
+    const done = (ok: boolean) => {
+      btn.textContent = ok ? 'Copied' : 'Press Ctrl+C';
+      btn.classList.toggle('copied', ok);
+      setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+    };
+    const fallback = (text: string) => {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      let ok = false;
+      try { ok = document.execCommand('copy'); } catch (e) { /* ignore */ }
+      document.body.removeChild(ta);
+      if (!ok) {
+        const r = document.createRange();
+        r.selectNodeContents(pre);
+        const sel = window.getSelection();
+        sel?.removeAllRanges();
+        sel?.addRange(r);
+      }
+      done(ok);
+    };
+    btn.addEventListener('click', () => {
+      const text = pre.innerText.replace(/\s+$/, '');
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(() => done(true), () => fallback(text));
+      } else {
+        fallback(text);
+      }
+    });
+  });
 </script>
