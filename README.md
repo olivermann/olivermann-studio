@@ -57,8 +57,8 @@ Body text goes here. Regular Markdown: paragraphs, **bold**, [links](https://exa
 | `externalLink` | no | If set, the post links straight out to this URL and **no page is created on the site**. Use for pieces published elsewhere (UBC stories, YouTube, etc.). |
 | `role` | no | For speaking entries: `"Moderator"`, `"Speaker"`, etc. Shown on the card. |
 | `skillsTags` | no | For case studies: the "Skills Demonstrated" pills at the end of the post. |
-| `featured` | no | `true` puts the post in the home page "Featured Case Studies" block. |
-| `featuredRank` | with featured | `1` = the big slot, `2`–`4` = the stacked slots. |
+| `featured` | no | `true` puts the post in the home page "Featured Case Studies" block. The four newest featured posts (by `date`) show: the newest in the big slot, the next three stacked. |
+| `featuredRank` | no | No longer used. Safe to leave or delete. |
 
 ### Case study structure (STAR format)
 
