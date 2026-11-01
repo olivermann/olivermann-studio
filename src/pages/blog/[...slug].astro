@@ -140,6 +140,50 @@ const byline = ['Oliver Mann', d.role, longDate(d.date)].filter(Boolean).join(' 
   .skills { margin-top: 44px; padding-top: 26px; border-top: 1px solid var(--line); }
   .skills h2 { font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 14px; }
   .back { display: inline-block; margin-top: 44px; font-size: 12px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; }
+
+  /* ---------- Long research posts (wrap the post body in <div class="long-post">) ----------
+     Used by the thesis recommendations post: bigger section headings, a note box, jump links,
+     an exact-extract section with sub-headings, and a summary table. Scoped so other posts are unaffected. */
+  html:has(.long-post) { scroll-behavior: smooth; }
+  .body .long-post h2 { font-weight: 800; font-size: 24px; line-height: 1.25; letter-spacing: -0.015em; margin: 64px 0 12px; scroll-margin-top: 24px; }
+  .body .long-post > h2:first-child { margin-top: 0; }
+  .body .long-post h3 { font-weight: 800; font-size: 17px; line-height: 1.35; letter-spacing: -0.005em; margin: 32px 0 10px; scroll-margin-top: 24px; }
+  .body .long-post p + ul { margin-top: 16px; }
+  .body .long-post li { margin-bottom: 14px; }
+  .body .long-post li > p + p { margin-top: 12px; }
+  .body .long-post strong { color: var(--text); font-weight: 700; }
+
+  .body .long-post .note { margin-top: 28px; }
+  .body .long-post .note p { background: #F5F5F5; border-left: 3px solid var(--text); padding: 14px 18px; font-size: 15px; line-height: 1.65; color: #2e2e2e; }
+  .body .long-post .note p strong { display: block; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 4px; }
+
+  .long-post .jump { margin-top: 20px; display: flex; flex-wrap: wrap; gap: 8px 18px; align-items: baseline; }
+  .long-post .jump-label { font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+  .body .long-post .jump a { font-size: 13.5px; font-weight: 500; }
+
+  .body .long-post .extract-section > h2:first-child { margin-top: 64px; }
+  .body .long-post .extract-section h3 { border-top: 1px solid var(--line); padding-top: 30px; margin-top: 44px; }
+  .body .long-post .extract-section h3:first-of-type { border-top: none; padding-top: 0; margin-top: 28px; }
+  .body .long-post p.extract-label { font-size: 11px; font-weight: 700; line-height: 1.5; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin: 0 0 4px; }
+
+  .long-post .table-wrap { margin-top: 64px; }
+  .long-post table.summary { width: 100%; border-collapse: collapse; margin-top: 4px; }
+  .long-post table.summary caption { text-align: left; padding-bottom: 14px; }
+  .long-post .t-label { display: block; font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+  .long-post .t-title { display: block; font-weight: 800; font-size: 22px; letter-spacing: -0.015em; margin-top: 2px; }
+  .long-post table.summary tr { border-top: 1px solid var(--line); }
+  .long-post table.summary tr:first-child { border-top: 2px solid var(--text); }
+  .long-post table.summary tr:last-child { border-bottom: 2px solid var(--text); }
+  .long-post table.summary th[scope="row"] { text-align: left; vertical-align: top; width: 34%; padding: 20px 24px 20px 0; font-weight: 700; font-size: 14.5px; line-height: 1.5; }
+  .long-post table.summary td { vertical-align: top; padding: 14px 0 6px; }
+  .long-post table.summary td ul { list-style: none; margin: 0; }
+  .body .long-post table.summary li { font-size: 15px; line-height: 1.55; margin: 0; padding: 7px 0 9px; border-top: 1px solid var(--line); }
+  .body .long-post table.summary li:first-child { border-top: none; padding-top: 6px; }
+  @media (max-width: 640px) {
+    .long-post table.summary, .long-post table.summary tbody, .long-post table.summary tr, .long-post table.summary th, .long-post table.summary td { display: block; width: 100%; }
+    .long-post table.summary th[scope="row"] { width: 100%; padding: 18px 0 2px; }
+    .long-post table.summary td { padding: 4px 0 14px; }
+  }
 </style>
 
 <script>
