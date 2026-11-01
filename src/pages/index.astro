@@ -16,7 +16,7 @@ import {
 
 const posts = await getPublishedPosts();
 
-// 5.2 Featured Case Studies: rank 1 = big slot, ranks 2-4 = stacked rows.
+// 5.2 Featured Case Studies: the four newest posts with featured: true. Newest = big slot, the next three = stacked rows.
 const featured = featuredPosts(posts);
 const featuredBig = featured[0];
 const featuredRows = featured.slice(1);
