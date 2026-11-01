@@ -20,11 +20,11 @@ export async function getPublishedPosts(): Promise<Post[]> {
   return posts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 }
 
-/** Featured case studies, ordered by featuredRank (1 = big slot, 2-4 = stacked). */
+/** Featured case studies: the four newest posts with featured: true (newest = big slot, next three = stacked). */
 export function featuredPosts(posts: Post[]): Post[] {
   return posts
-    .filter((p) => p.data.featured && p.data.featuredRank)
-    .sort((a, b) => (a.data.featuredRank ?? 99) - (b.data.featuredRank ?? 99))
+    .filter((p) => p.data.featured)
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
     .slice(0, 4);
 }
 
