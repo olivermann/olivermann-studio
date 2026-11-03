@@ -53,13 +53,20 @@ const year = new Date().getFullYear();
 <slot />
 
 <footer class="site-footer">
-  <a href="mailto:hello@olivermann.studio">hello@olivermann.studio</a>
-  <div class="social">
-    <a href="https://www.linkedin.com/in/oliver-e-mann/">LinkedIn</a>
-    <a href="https://www.instagram.com/oliver.mann.photography/">Instagram</a>
+  <p class="footer-note">
+    <a class="ai-link" href="/blog/how-i-built-my-website-with-ai/">
+      <svg class="spark" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0c.6 6.6 5.4 11.4 12 12-6.6.6-11.4 5.4-12 12-.6-6.6-5.4-11.4-12-12C6.6 11.4 11.4 6.6 12 0z"/></svg>
+      Learn how I built this site with AI <span class="arrow" aria-hidden="true">&rarr;</span>
+    </a>
+  </p>
+  <div class="footer-center">
+    <a href="mailto:hello@olivermann.studio">hello@olivermann.studio</a>
+    <div class="social">
+      <a href="https://www.linkedin.com/in/oliver-e-mann/">LinkedIn</a>
+      <a href="https://www.instagram.com/oliver.mann.photography/">Instagram</a>
+    </div>
   </div>
-  <span>&copy; Oliver Mann {year}</span>
-  <p class="footer-note">Learn <a href="/blog/how-i-built-my-website-with-ai/">how I built this site with AI</a></p>
+  <span class="footer-copy">&copy; Oliver Mann {year}</span>
 </footer>
 
 <script>
