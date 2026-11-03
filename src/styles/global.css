@@ -70,6 +70,8 @@ a:hover { text-decoration: underline; }
 .site-footer a { color: var(--muted); }
 .site-footer a:hover { color: var(--text); }
 .site-footer .social { display: flex; gap: 24px; }
+.site-footer .footer-note { flex-basis: 100%; margin: 0; text-align: center; }
+.site-footer .footer-note a { text-decoration: underline; text-underline-offset: 3px; }
 
 /* ---------- Section scaffolding ---------- */
 .section-head {
