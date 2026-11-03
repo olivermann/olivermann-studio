@@ -5,7 +5,7 @@ types: [research, indigenous-engagement]
 draft: false
 heroImage: "./hero-ethical-storytelling-ma-research.jpg"
 heroImageAlt: "Rows of orange paper T-shirt cutouts on wooden stakes in a grass field, each with a handwritten commitment. The one in focus reads \"Lets do better\" with a heart."
-heroCaption: "I took this photo while volunteering as an event photographer at UBC's 2024 Intergenerational March to Commemorate Orange Shirt Day."
+heroCaption: "I took this photo while volunteering as a photographer at UBC's 2024 Intergenerational March to Commemorate Orange Shirt Day."
 excerpt: "My MA research examines how Canada's largest universities can use communications and storytelling to advance truth and reconciliation and strengthen their relationships with Indigenous partners."
 ---
 
