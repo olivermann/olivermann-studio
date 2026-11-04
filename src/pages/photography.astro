@@ -94,12 +94,9 @@ const gallery = await Promise.all(
   .intro p { margin-top: 14px; font-size: 14.5px; color: var(--muted); }
   .intro a { color: var(--text); text-decoration: underline; text-underline-offset: 3px; }
 
-  /* Quote band sits in the wider than the intro text so the quote fits on one line on desktop; its dividers match the quote width, not the gallery. */
-  .press { max-width: 1060px; margin: 28px auto 0; padding: 0 clamp(24px, 6vw, 80px); }
-  .press-inner { margin: 0; padding: 20px 0 22px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); text-align: center; }
-  .press .source { margin: 0; font-size: 16px; line-height: 1.5; color: var(--text); }
-  .press .source + .source { margin-top: 6px; }
-  @media (min-width: 800px) { .press .source { white-space: nowrap; } }
+  /* Feature lines match the intro text: centered, 14.5px, muted, same 900px column. */
+  .press { max-width: 900px; margin: 14px auto 0; padding: 0 clamp(24px, 6vw, 80px); text-align: center; }
+  .press p { margin-top: 6px; font-size: 14.5px; color: var(--muted); }
 
   .filters { justify-content: center; gap: clamp(20px, 4vw, 44px); margin: 20px 0 32px; }
 
