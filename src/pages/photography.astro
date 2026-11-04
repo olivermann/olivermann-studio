@@ -45,16 +45,15 @@ const gallery = await Promise.all(
 
 <section class="intro">
   <h1>Photography</h1>
-  <p>I bought my first DSLR, a Canon T3i, to take photos of my band's first tour across Western Canada. When I stopped playing music, I channeled all my creativity into photography. I started by shooting family and friends, loved the bold creativity of fashion, and made a niche in male portraiture.</p>
-  <p>These days, I shoot on a Sony a7 IV. Photos are the new headlines, and I use my photography to make my marketing and storytelling stronger.</p>
+  <p>I bought my first DSLR, a Canon T3i, to take photos of my band's first tour across Western Canada. When I stopped playing music, I channeled all my creativity into photography. I started by shooting family and friends, loved the bold creativity of fashion, and made a niche in male portraiture. These days, I shoot on a Sony a7 IV. Photos are the new headlines, and I use my photography to make my marketing and storytelling stronger.</p>
   <p>Open to freelance portrait and event photography. <a href="mailto:hello@olivermann.studio">Get in touch</a>.</p>
 </section>
 
-<section class="press" aria-label="Press mention">
-  <blockquote class="press-inner">
-    <p class="quote">“A true unicorn in the portrait photography world, Oliver focuses his work on male portraits.”</p>
-    <p class="source">- Daily Hive, 9 Talented Portrait Photographers to Follow on Instagram in Vancouver</p>
-  </blockquote>
+<section class="press" aria-label="Featured in">
+  <div class="press-inner">
+    <p class="source">Daily Hive: 9 Talented Portrait Photographers to Follow on Instagram in Vancouver</p>
+    <p class="source">Narcity: 14 Incredible Vancouver Photographers You Need to Follow Right Now</p>
+  </div>
 </section>
 
 <div class="filters centered" role="tablist" aria-label="Filter photos">
@@ -98,8 +97,8 @@ const gallery = await Promise.all(
   /* Quote band sits in the wider than the intro text so the quote fits on one line on desktop; its dividers match the quote width, not the gallery. */
   .press { max-width: 1060px; margin: 28px auto 0; padding: 0 clamp(24px, 6vw, 80px); }
   .press-inner { margin: 0; padding: 20px 0 22px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); text-align: center; }
-  .press .quote { font-size: 19px; line-height: 1.5; color: var(--text); text-wrap: balance; }
-  .press .source { margin: 8px 0 0; font-size: 14.5px; color: var(--muted); }
+  .press .source { margin: 0; font-size: 16px; line-height: 1.5; color: var(--text); }
+  .press .source + .source { margin-top: 6px; }
   @media (min-width: 800px) { .press .source { white-space: nowrap; } }
 
   .filters { justify-content: center; gap: clamp(20px, 4vw, 44px); margin: 20px 0 32px; }
