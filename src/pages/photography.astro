@@ -45,6 +45,15 @@ const gallery = await Promise.all(
 
 <section class="intro">
   <h1>Photography</h1>
+  <p>I bought my first DSLR, a Canon T3i, to take photos of my band's first tour across Western Canada. When I stopped playing music, I channeled all my creativity into photography. I started by shooting family and friends, loved the bold creativity of fashion, and made a niche in male portraiture. These days, I shoot on a Sony a7 IV. Photos are the new headlines, and I use my photography to make my marketing and storytelling stronger.</p>
+  <p>Open to freelance portrait and event photography. <a href="mailto:hello@olivermann.studio">Get in touch</a></p>
+</section>
+
+<section class="press" aria-label="Press mention">
+  <blockquote class="press-inner">
+    <p class="quote">“A true unicorn in the portrait photography world, Oliver focuses his work on male portraits.”</p>
+    <p class="source">- Daily Hive, 9 Talented Portrait Photographers to Follow on Instagram in Vancouver</p>
+  </blockquote>
 </section>
 
 <div class="filters centered" role="tablist" aria-label="Filter photos">
@@ -75,16 +84,23 @@ const gallery = await Promise.all(
   ))}
 </div>
 
-<p class="see-more">Want to see more from a shoot? <a href="mailto:hello@olivermann.studio">Get in touch</a></p>
-
 <Lightbox />
 </BaseLayout>
 
 <style>
-  .intro { text-align: center; max-width: 640px; margin: clamp(28px, 6vh, 56px) auto 0; padding: 0 24px; }
+  .intro { text-align: center; max-width: 580px; margin: clamp(28px, 6vh, 56px) auto 0; padding: 0 24px; }
   .intro h1 { font-weight: 800; font-size: clamp(32px, 4.6vw, 46px); letter-spacing: -0.02em; }
+  .intro p { margin: 16px 0 0; font-size: 14px; color: var(--muted); line-height: 1.75; }
+  .intro p + p { margin-top: 12px; }
+  .intro a { color: var(--text); text-decoration: underline; }
 
-  .filters { justify-content: center; gap: clamp(20px, 4vw, 44px); margin: 40px 0 48px; }
+  .press { max-width: 1400px; margin: 36px auto 0; padding: 0 clamp(24px, 6vw, 80px); }
+  .press-inner { margin: 0; padding: 26px 0 28px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); text-align: center; }
+  .press .quote { max-width: 580px; margin: 0 auto; font-size: 19px; line-height: 1.5; color: var(--text); text-wrap: balance; }
+  .press .source { margin: 8px 0 0; font-size: 12px; line-height: 1.75; color: var(--muted); }
+  @media (min-width: 700px) { .press .source { white-space: nowrap; } }
+
+  .filters { justify-content: center; gap: clamp(20px, 4vw, 44px); margin: 28px 0 40px; }
 
   .grid { columns: 3; column-gap: 28px; padding: 0 clamp(24px, 6vw, 80px); max-width: 1400px; margin: 0 auto; }
   @media (max-width: 900px) { .grid { columns: 2; column-gap: 20px; } }
@@ -96,9 +112,6 @@ const gallery = await Promise.all(
   @media (prefers-reduced-motion: reduce) {
     .grid figure:hover :global(img) { transform: none; }
   }
-
-  .see-more { text-align: center; font-size: 14px; color: var(--muted); margin: 56px 24px 0; }
-  .see-more a { text-decoration: underline; }
 </style>
 
 <script>
