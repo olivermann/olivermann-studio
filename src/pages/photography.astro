@@ -89,20 +89,20 @@ const gallery = await Promise.all(
 </BaseLayout>
 
 <style>
-  /* Intro text matches blog body text (see .body in blog/[...slug].astro): same column, size, font, colour and left alignment. */
-  .intro { max-width: 720px; margin: clamp(28px, 6vh, 56px) auto 0; padding: 0 clamp(24px, 6vw, 80px); }
-  .intro h1 { text-align: center; font-weight: 800; font-size: clamp(32px, 4.6vw, 46px); letter-spacing: -0.02em; }
-  .intro p { margin-top: 16px; font-size: 16px; line-height: 1.8; color: #2e2e2e; text-align: left; }
-  .intro a { text-decoration: underline; text-underline-offset: 3px; }
+  /* Intro matches the Blog page intro (blog/index.astro): centered, 14.5px, muted, same 900px content column. */
+  .intro { max-width: 900px; margin: clamp(24px, 5vh, 44px) auto 0; padding: 0 clamp(24px, 6vw, 80px); text-align: center; }
+  .intro h1 { font-weight: 800; font-size: clamp(32px, 4.6vw, 46px); letter-spacing: -0.02em; }
+  .intro p { margin-top: 14px; font-size: 14.5px; color: var(--muted); }
+  .intro a { color: var(--text); text-decoration: underline; text-underline-offset: 3px; }
 
-  /* Quote band uses the same column as the intro text, so the dividers match the quote width, not the gallery. */
-  .press { max-width: 720px; margin: 36px auto 0; padding: 0 clamp(24px, 6vw, 80px); }
-  .press-inner { margin: 0; padding: 26px 0 28px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); text-align: center; }
+  /* Quote band sits in the same column as the intro text, so its dividers match the text width, not the gallery. */
+  .press { max-width: 900px; margin: 28px auto 0; padding: 0 clamp(24px, 6vw, 80px); }
+  .press-inner { margin: 0; padding: 20px 0 22px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); text-align: center; }
   .press .quote { font-size: 19px; line-height: 1.5; color: var(--text); }
   .press .source { margin: 8px 0 0; font-size: 12px; line-height: 1.75; color: var(--muted); }
   @media (min-width: 700px) { .press .source { white-space: nowrap; } }
 
-  .filters { justify-content: center; gap: clamp(20px, 4vw, 44px); margin: 28px 0 40px; }
+  .filters { justify-content: center; gap: clamp(20px, 4vw, 44px); margin: 20px 0 32px; }
 
   .grid { columns: 3; column-gap: 28px; padding: 0 clamp(24px, 6vw, 80px); max-width: 1400px; margin: 0 auto; }
   @media (max-width: 900px) { .grid { columns: 2; column-gap: 20px; } }
