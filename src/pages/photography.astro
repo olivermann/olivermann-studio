@@ -45,7 +45,7 @@ const gallery = await Promise.all(
 
 <section class="intro">
   <h1>Photography</h1>
-  <p class="story" id="story" role="button" tabindex="0" aria-expanded="false" aria-controls="story-more">I bought my first DSLR, a Canon T3i, to take photos of my band's first tour across Canada.<span class="cue" id="cue" aria-hidden="true"><span id="typed"></span><span class="caret" id="caret"></span></span><span class="rest"> When I stopped playing music, I channeled all my creativity into photography. I started by shooting family and friends, loved the bold creativity of fashion, and made a niche in male portraiture. These days, I shoot on a Sony a7 IV. Photos are the new headlines, and I use my photography to make my marketing and storytelling stronger.</span></p>
+  <p class="story" id="story" role="button" tabindex="0" aria-expanded="false" aria-controls="story-more">I bought my first DSLR, a Canon T3i, to take photos of my band's first tour across <span class="nowrap">Canada.<span class="cue" id="cue" aria-hidden="true"><span id="typed"></span><span class="caret" id="caret"></span></span></span><span class="rest"> When I stopped playing music, I channeled all my creativity into photography. I started by shooting family and friends, loved the bold creativity of fashion, and made a niche in male portraiture. These days, I shoot on a Sony a7 IV. Photos are the new headlines, and I use my photography to make my marketing and storytelling stronger.</span></p>
   <div class="more" id="story-more">
     <div class="more-inner">
       <p class="featured-label">Featured in</p>
@@ -90,14 +90,15 @@ const gallery = await Promise.all(
 <style>
   /* Intro: same centered, 14.5px, muted style as the Blog page intro. First sentence is static;
      a looping typed "Read more" cue opens the rest of the story inline, plus the press mentions. */
-  .intro { max-width: 900px; margin: clamp(24px, 5vh, 44px) auto 0; padding: 0 clamp(24px, 6vw, 80px); text-align: center; }
+  .intro { max-width: 1000px; margin: clamp(24px, 5vh, 44px) auto 0; padding: 0 clamp(24px, 6vw, 80px); text-align: center; }
   .intro h1 { font-weight: 800; font-size: clamp(32px, 4.6vw, 46px); letter-spacing: -0.02em; }
   .intro p { font-size: 14.5px; color: var(--muted); }
   .intro a { color: var(--text); text-decoration: underline; text-underline-offset: 3px; }
 
-  .story { max-width: 640px; margin: 18px auto 0; line-height: 1.7; cursor: pointer; }
+  .story { max-width: 820px; margin: 18px auto 0; line-height: 1.7; cursor: pointer; }
   .story.open { cursor: default; }
-  .cue { display: inline-block; margin-left: 6px; color: var(--text); font-weight: 500; white-space: nowrap; text-align: left; border-bottom: 1px solid transparent; }
+  .nowrap { white-space: nowrap; }
+  .cue { display: inline-block; min-width: 5.2em; margin-left: 6px; color: var(--text); font-weight: 500; white-space: nowrap; text-align: left; border-bottom: 1px solid transparent; }
   .story:not(.open) .cue:hover { border-bottom-color: var(--text); }
   .caret { display: inline-block; width: 1.5px; height: 1em; background: var(--text); vertical-align: -2px; margin-left: 1px; animation: caret-blink 0.8s steps(1) infinite; }
   @keyframes caret-blink { 50% { opacity: 0; } }
@@ -108,8 +109,8 @@ const gallery = await Promise.all(
 
   .more { display: grid; grid-template-rows: 0fr; opacity: 0; transition: grid-template-rows 0.6s ease 0.15s, opacity 0.5s ease 0.15s; }
   .more.open { grid-template-rows: 1fr; opacity: 1; }
-  .more-inner { overflow: hidden; min-height: 0; }
-  .featured-label { margin-top: 22px; font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 500; }
+  .more-inner { overflow: hidden; min-height: 0; max-width: 820px; margin: 0 auto; text-align: left; }
+  .featured-label { margin-top: 26px; font-family: var(--sans); font-size: 12px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
   .press-line { margin-top: 6px; font-style: italic; line-height: 1.6; }
   .cta { margin-top: 18px; }
 
