@@ -41,7 +41,7 @@ const storyFormat = (p: (typeof stories)[number]) => TYPE_LABELS[p.data.types[0]
 
 <BaseLayout
   title="Oliver Mann · Communications Strategist & Photographer"
-  description="Oliver Mann is a Vancouver-based communications strategist and photographer: case studies, storytelling, research, and speaking from 15 years leading marketing and communications at UBC."
+  description="Oliver Mann is a Vancouver-based communicator, strategist, and storyteller with 15 years leading marketing and communications at UBC. Case studies, research, and creative work."
   active="home"
 >
 <main>
@@ -49,7 +49,7 @@ const storyFormat = (p: (typeof stories)[number]) => TYPE_LABELS[p.data.types[0]
   <!-- 5.1 Hero: name + typed line only -->
   <section class="hero">
     <h1>Oliver Mann</h1>
-    <p class="typed-line">I am a <span class="typed" id="typed">communications strategist</span></p>
+    <p class="typed-line">I am a <span class="typed" id="typed">communicator</span></p>
   </section>
 
   <!-- 5.2 Featured Case Studies -->
@@ -201,15 +201,16 @@ const storyFormat = (p: (typeof stories)[number]) => TYPE_LABELS[p.data.types[0]
 <script>
   // ---------- Typed rotating roles (respects prefers-reduced-motion) ----------
   const roles = [
-    'communications strategist',
+    'communicator',
+    'strategist',
+    'storyteller',
     'marketer',
+    'writer',
     'photographer',
     'videographer',
     'podcaster',
-    'writer',
-    'event manager',
     'researcher',
-    'speaker',
+    'organizer',
   ];
   const typedEl = document.getElementById('typed')!;
   const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
