@@ -45,13 +45,15 @@ const gallery = await Promise.all(
 
 <section class="intro">
   <h1>Photography</h1>
-  <p>I bought my first DSLR, a Canon T3i, to take photos of my band's first tour across Western Canada. When I stopped playing music, I channeled all my creativity into photography. I started by shooting family and friends, loved the bold creativity of fashion, and made a niche in male portraiture. These days, I shoot on a Sony a7 IV. Photos are the new headlines, and I use my photography to make my marketing and storytelling stronger.</p>
-  <p>Open to freelance portrait and event photography. <a href="mailto:hello@olivermann.studio">Get in touch</a>.</p>
-</section>
-
-<section class="press" aria-label="Featured in">
-  <p><em>Daily Hive: 9 Talented Portrait Photographers to Follow on Instagram in Vancouver</em></p>
-  <p><em>Narcity: 14 Incredible Vancouver Photographers You Need to Follow Right Now</em></p>
+  <p class="story" id="story" role="button" tabindex="0" aria-expanded="false" aria-controls="story-more">I bought my first DSLR, a Canon T3i, to take photos of my band's first tour across Canada.<span class="cue" id="cue" aria-hidden="true"><span id="typed"></span><span class="caret" id="caret"></span></span><span class="rest"> When I stopped playing music, I channeled all my creativity into photography. I started by shooting family and friends, loved the bold creativity of fashion, and made a niche in male portraiture. These days, I shoot on a Sony a7 IV. Photos are the new headlines, and I use my photography to make my marketing and storytelling stronger.</span></p>
+  <div class="more" id="story-more">
+    <div class="more-inner">
+      <p class="featured-label">Featured in</p>
+      <p class="press-line">Daily Hive: 9 Talented Portrait Photographers to Follow on Instagram in Vancouver</p>
+      <p class="press-line">Narcity: 14 Incredible Vancouver Photographers You Need to Follow Right Now</p>
+    </div>
+  </div>
+  <p class="cta">Open to freelance portrait and event photography. <a href="mailto:hello@olivermann.studio">Get in touch</a>.</p>
 </section>
 
 <div class="filters centered" role="tablist" aria-label="Filter photos">
@@ -86,15 +88,36 @@ const gallery = await Promise.all(
 </BaseLayout>
 
 <style>
-  /* Intro matches the Blog page intro (blog/index.astro): centered, 14.5px, muted, same 900px content column. */
+  /* Intro: same centered, 14.5px, muted style as the Blog page intro. First sentence is static;
+     a looping typed "Read more" cue opens the rest of the story inline, plus the press mentions. */
   .intro { max-width: 900px; margin: clamp(24px, 5vh, 44px) auto 0; padding: 0 clamp(24px, 6vw, 80px); text-align: center; }
   .intro h1 { font-weight: 800; font-size: clamp(32px, 4.6vw, 46px); letter-spacing: -0.02em; }
-  .intro p { margin-top: 14px; font-size: 14.5px; color: var(--muted); }
+  .intro p { font-size: 14.5px; color: var(--muted); }
   .intro a { color: var(--text); text-decoration: underline; text-underline-offset: 3px; }
 
-  /* Feature lines match the intro text: centered, 14.5px, muted, same 900px column. */
-  .press { max-width: 900px; margin: 14px auto 0; padding: 0 clamp(24px, 6vw, 80px); text-align: center; }
-  .press p { margin-top: 6px; font-size: 14.5px; color: var(--muted); }
+  .story { max-width: 640px; margin: 18px auto 0; line-height: 1.7; cursor: pointer; }
+  .story.open { cursor: default; }
+  .cue { display: inline-block; margin-left: 6px; color: var(--text); font-weight: 500; white-space: nowrap; text-align: left; border-bottom: 1px solid transparent; }
+  .story:not(.open) .cue:hover { border-bottom-color: var(--text); }
+  .caret { display: inline-block; width: 1.5px; height: 1em; background: var(--text); vertical-align: -2px; margin-left: 1px; animation: caret-blink 0.8s steps(1) infinite; }
+  @keyframes caret-blink { 50% { opacity: 0; } }
+  .rest { display: none; }
+  .story.open .rest { display: inline; animation: story-fade 0.6s ease; }
+  .story.open .cue { display: none; }
+  @keyframes story-fade { from { opacity: 0; } to { opacity: 1; } }
+
+  .more { display: grid; grid-template-rows: 0fr; opacity: 0; transition: grid-template-rows 0.6s ease 0.15s, opacity 0.5s ease 0.15s; }
+  .more.open { grid-template-rows: 1fr; opacity: 1; }
+  .more-inner { overflow: hidden; min-height: 0; }
+  .featured-label { margin-top: 22px; font-size: 11.5px; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 500; }
+  .press-line { margin-top: 6px; font-style: italic; line-height: 1.6; }
+  .cta { margin-top: 18px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .caret { animation: none; }
+    .story.open .rest { animation: none; }
+    .more { transition: none; }
+  }
 
   .filters { justify-content: center; gap: clamp(20px, 4vw, 44px); margin: 20px 0 32px; }
 
@@ -148,4 +171,47 @@ const gallery = await Promise.all(
       });
     });
   });
+</script>
+
+<script>
+  // Looping typed "Read more" cue; click the line to reveal the rest of the story and press mentions.
+  const story = document.getElementById('story')!;
+  const more = document.getElementById('story-more')!;
+  const typed = document.getElementById('typed')!;
+  const caret = document.getElementById('caret')!;
+  const word = 'Read more';
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let isOpen = false;
+  const wait = (ms: number) => new Promise((r) => setTimeout(r, ms));
+
+  async function loop() {
+    if (reduce) {
+      typed.textContent = word;
+      caret.style.display = 'none';
+      return;
+    }
+    while (!isOpen) {
+      for (let i = 0; i <= word.length && !isOpen; i++) { typed.textContent = word.slice(0, i); await wait(90); }
+      if (isOpen) break;
+      await wait(1600);
+      for (let j = word.length; j >= 0 && !isOpen; j--) { typed.textContent = word.slice(0, j); await wait(45); }
+      await wait(500);
+    }
+  }
+
+  function openStory() {
+    if (isOpen) return;
+    isOpen = true;
+    story.classList.add('open');
+    more.classList.add('open');
+    story.setAttribute('aria-expanded', 'true');
+    story.removeAttribute('role');
+    story.removeAttribute('tabindex');
+  }
+
+  story.addEventListener('click', openStory);
+  story.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openStory(); }
+  });
+  loop();
 </script>
