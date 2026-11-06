@@ -35,13 +35,13 @@ const year = new Date().getFullYear();
   <meta property="og:type" content={ogType} />
   <meta property="og:url" content={canonical} />
   <meta property="og:image" content={ogImageUrl} />
-  <meta property="og:site_name" content="Oliver Mann" />
+  <meta property="og:site_name" content="Oliver Mann Studio" />
   <meta name="twitter:card" content="summary_large_image" />
 </head>
 <body>
 
 <header class="site-header">
-  <a class="wordmark" href="/">Oliver Mann</a>
+  {active !== 'home' && <a class="wordmark" href="/">Oliver Mann Studio</a>}
   <nav class="site-nav" aria-label="Main">
     <a href="/" class={active === 'home' ? 'active' : undefined}>Home</a>
     <a href="/photography/" class={active === 'photography' ? 'active' : undefined}>Photography</a>
