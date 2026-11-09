@@ -56,7 +56,6 @@ const storyFormat = (p: (typeof stories)[number]) => TYPE_LABELS[p.data.types[0]
   <section class="fade-in">
     <div class="section-head">
       <h2>Featured Case Studies</h2>
-      <a class="view-more" href="/blog/#case-studies">View more case studies &rarr;</a>
     </div>
     <div class={featuredRows.length === 0 ? 'split single' : 'split'}>
       {featuredBig && (
@@ -83,13 +82,15 @@ const storyFormat = (p: (typeof stories)[number]) => TYPE_LABELS[p.data.types[0]
         </div>
       )}
     </div>
+    <div class="view-more-row">
+      <a class="view-more" href="/blog/#case-studies">View more case studies &rarr;</a>
+    </div>
   </section>
 
   <!-- 5.3 Storytelling: latest 6 shown, filterable by format -->
   <section class="fade-in">
     <div class="section-head">
       <h2>Storytelling</h2>
-      <a class="view-more" href="/blog/#storytelling">View more stories &rarr;</a>
     </div>
     <div class="filters" role="tablist" aria-label="Filter stories">
       <button class="active" data-filter="all">All</button>
@@ -117,13 +118,15 @@ const storyFormat = (p: (typeof stories)[number]) => TYPE_LABELS[p.data.types[0]
         </a>
       ))}
     </div>
+    <div class="view-more-row">
+      <a class="view-more" href="/blog/#storytelling">View more stories &rarr;</a>
+    </div>
   </section>
 
   <!-- 5.4 Research & Indigenous Engagement -->
   <section class="fade-in">
     <div class="section-head">
       <h2>Research &amp; Indigenous Engagement</h2>
-      <a class="view-more" href="/blog/#research">View more &rarr;</a>
     </div>
     <div class="split">
       {researchBig && (
@@ -154,13 +157,15 @@ const storyFormat = (p: (typeof stories)[number]) => TYPE_LABELS[p.data.types[0]
         ))}
       </div>
     </div>
+    <div class="view-more-row">
+      <a class="view-more" href="/blog/#research">View more &rarr;</a>
+    </div>
   </section>
 
   <!-- 5.5 Speaking & Leadership -->
   <section class="fade-in">
     <div class="section-head">
       <h2>Speaking &amp; Leadership</h2>
-      <a class="view-more" href="/blog/#speaking">View more &rarr;</a>
     </div>
     <div class="cards">
       {speaking.map((p) => (
@@ -180,6 +185,9 @@ const storyFormat = (p: (typeof stories)[number]) => TYPE_LABELS[p.data.types[0]
           <p class="excerpt">{p.data.excerpt}</p>
         </a>
       ))}
+    </div>
+    <div class="view-more-row">
+      <a class="view-more" href="/blog/#speaking">View more &rarr;</a>
     </div>
   </section>
 
