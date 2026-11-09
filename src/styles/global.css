@@ -118,6 +118,7 @@ a:hover { text-decoration: underline; }
   padding-bottom: 2px;
 }
 .view-more:hover { text-decoration: none; opacity: 0.6; }
+.view-more-row { display: flex; justify-content: flex-end; margin-top: 32px; }
 
 /* ---------- Entrance fade ---------- */
 .fade-in { opacity: 0; transform: translateY(14px); transition: opacity 0.6s ease, transform 0.6s ease; }
