@@ -1,5 +1,5 @@
 ---
-title: "UBC Awards Over $700,000 to 30 Community-Led Projects Through the 2024-25 Community-University Engagement Support Fund"
+title: "From Indigenous-Led Stewardship to Refugee Health Care Access: 2024-25 Community-University Engagement Support Fund Recipients"
 date: 2025-04-04
 types: [writing]
 draft: false
