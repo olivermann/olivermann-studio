@@ -4,8 +4,8 @@ date: 2026-11-02
 types: [speaking]
 draft: false
 role: "Speaker"
-heroImage: "./hero-plot-twists-arts-alumni-career-stories.png"
-heroImageAlt: "Event graphic for Plot Twists: Arts Alumni Career Stories, November 2, 2026 at 6:30 PM, UBC Vancouver Campus, with a line-drawn microphone and cord on a purple background"
+heroImage: "./hero-plot-twists-arts-alumni-career-stories.jpg"
+heroImageAlt: "Oliver Mann speaking at a clear podium into a handheld microphone, holding a slide clicker, in front of a UBC Faculty of Arts banner and an audience at Plot Twists: Arts Alumni Career Stories"
 excerpt: "An evening of live, pecha kucha-style storytelling where UBC Faculty of Arts alumni shared the moments that shaped their careers."
 ---
 
@@ -18,6 +18,7 @@ Faculty of Arts alumni shared the moments that shaped their lives and careers. T
 - **When:** Monday, November 2, 2026, 6:30 to 8:30 PM
 - **Where:** Liu Institute for Global Issues, UBC Vancouver
 - **Event page:** [arts.ubc.ca](https://www.arts.ubc.ca/events/event/plot-twists/)
+- **Event recap:** [Where plot twists can lead: Five lessons from Arts alumni career stories](https://www.arts.ubc.ca/news/plot-twists-lessons-from-arts-alumni-career-stories/), published by the Faculty of Arts
 
 ## My story
 
