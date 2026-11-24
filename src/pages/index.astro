@@ -5,7 +5,6 @@ import {
   getPublishedPosts,
   featuredPosts,
   storytellingPosts,
-  researchRowPosts,
   speakingPosts,
   postHref,
   isExternal,
@@ -27,7 +26,11 @@ const stories = storytellingPosts(posts);
 // 5.4 Research & Indigenous Engagement.
 const RESEARCH_BIG_ID = 'ethical-storytelling-ma-research';
 const researchBig = posts.find((p) => p.id === RESEARCH_BIG_ID);
-const researchRows = researchRowPosts(posts, RESEARCH_BIG_ID).slice(0, 3);
+// Stacked rows are picked by hand, in display order (the CCE Canada post is a speaking post, so the automatic filter would skip it).
+const RESEARCH_ROW_IDS = ['nuxalk-moa-exhibit', 'reciprocal-storytelling', 'cce-canada-ceremony-safety'];
+const researchRows = RESEARCH_ROW_IDS.map((id) => posts.find((p) => p.id === id)).filter(
+  (p): p is NonNullable<typeof p> => Boolean(p)
+);
 const researchLead =
   "My MA research examines how Canada's largest universities can use communications and storytelling to advance truth and reconciliation and strengthen their relationships with Indigenous partners.";
 
@@ -51,8 +54,8 @@ const storyFormat = (p: (typeof stories)[number]) => TYPE_LABELS[p.data.types[0]
     <h1>Oliver Mann Studio</h1>
     <p class="typed-line">I am a <span class="typed" id="typed">communicator</span></p>
     <div class="about">
-      <p>I have 15 years of experience leading communications, marketing and events. Where I shine is helping teams and initiatives define their objectives and clearly articulate their impact. Then I build the systems and strategies that scale and last.</p>
-      <p>The results: audiences grow. Engagement climbs. Stories resonate. More people take part in programs. Events sell out, again and again. And my favourite part is that teams, maybe for the first time, feel their work is understood and recognized.</p>
+      <p>Hi :) I have 15 years of experience leading communications, marketing and events. Where I shine is helping teams and initiatives define their objectives, clearly articulate their impact, and then build the systems and strategies that scale and last.</p>
+      <p>The results are that audiences grow. Engagement climbs. Stories resonate. More people take part in programs. Events sell out, again and again. And my favourite part: teams feel, maybe for the first time, that their work is understood and recognized.</p>
     </div>
   </section>
 
