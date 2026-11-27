@@ -3,6 +3,7 @@ import { render } from 'astro:content';
 import { getImage, Image } from 'astro:assets';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import Lightbox from '../../components/Lightbox.astro';
+import CaseStudyKit from '../../components/CaseStudyKit.astro';
 import { getPublishedPosts, tagLabel, longDate, isExternal } from '../../lib/posts';
 
 export async function getStaticPaths() {
@@ -21,7 +22,7 @@ const ogImage = d.heroImage
   ? new URL((await getImage({ src: d.heroImage, width: 1200 })).src, Astro.site).href
   : undefined;
 
-const byline = ['Oliver Mann', d.role, longDate(d.date)].filter(Boolean).join(' · ');
+const byline = ['Oliver Mann', d.role, longDate(d.date), d.readingTime].filter(Boolean).join(' · ');
 ---
 
 <BaseLayout
@@ -83,7 +84,7 @@ const byline = ['Oliver Mann', d.role, longDate(d.date)].filter(Boolean).join(' 
     <div class="skills">
       <h2>Skills Demonstrated</h2>
       <div class="pills">
-        {d.skillsTags.map((s) => <span>{s}</span>)}
+        {d.skillsTags.map((s) => (s === '|' ? <i class="pill-break" aria-hidden="true" /> : <span>{s}</span>))}
       </div>
     </div>
   )}
@@ -92,6 +93,7 @@ const byline = ['Oliver Mann', d.role, longDate(d.date)].filter(Boolean).join(' 
 </article>
 
 <Lightbox />
+<CaseStudyKit />
 </BaseLayout>
 
 <style is:global>
@@ -221,6 +223,7 @@ const byline = ['Oliver Mann', d.role, longDate(d.date)].filter(Boolean).join(' 
   // Prompt blocks: every fenced code block in a post body gets a "Prompt" bar and a Copy button.
   // Posts stay plain Markdown (a ```text block); this script does the rest.
   document.querySelectorAll<HTMLPreElement>('.post-body pre').forEach((pre) => {
+    if (pre.closest('.code-block')) return; // already has its own bar (case-study templates)
     const wrap = document.createElement('div');
     wrap.className = 'code-block';
     const bar = document.createElement('div');
