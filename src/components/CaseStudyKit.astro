@@ -75,9 +75,6 @@
   .case-study figure.fig img { width: 100%; height: auto; display: block; border: 1px solid var(--line); }
   .case-study figure.fig.narrow img { max-width: 560px; margin: 0 auto; }
   .case-study figcaption { margin-top: 12px; font-size: 13px; line-height: 1.5; color: var(--muted); display: flex; justify-content: space-between; gap: 16px; align-items: baseline; }
-  .case-study figcaption.replay-only { justify-content: flex-end; margin-top: 4px; }
-  .replay { font-family: var(--sans); background: none; border: none; cursor: pointer; font-size: 11px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); padding: 0; white-space: nowrap; }
-  .replay:hover { color: var(--text); }
 
   /* ---------- Tables ---------- */
   .table-wrap { margin: 32px 0; }
@@ -568,17 +565,6 @@
     }, { threshold: 0.35 });
     anims.forEach(function (el) { io.observe(el); });
   }
-
-  // ----- Replay buttons -----
-  document.querySelectorAll('[data-replay]').forEach(function (b) {
-    b.addEventListener('click', function () {
-      var el = document.getElementById(b.dataset.replay);
-      if (!el) return;
-      el.classList.remove('play');
-      void el.offsetWidth;
-      setTimeout(function () { play(el); }, 60);
-    });
-  });
 
   // ----- Asana: collapse sections, check off tasks -----
   document.querySelectorAll('.as-sec').forEach(function (btn) {
