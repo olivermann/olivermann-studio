@@ -56,7 +56,8 @@ Body text goes here. Regular Markdown: paragraphs, **bold**, [links](https://exa
 | `heroVideoId` | no | YouTube video ID (the part after `youtu.be/`). Use instead of `heroImage` for video posts; the YouTube thumbnail becomes the card image. Never set both. |
 | `externalLink` | no | If set, the post links straight out to this URL and **no page is created on the site**. Use for pieces published elsewhere (UBC stories, YouTube, etc.). |
 | `role` | no | For speaking entries: `"Moderator"`, `"Speaker"`, etc. Shown on the card. |
-| `skillsTags` | no | For case studies: the "Skills Demonstrated" pills at the end of the post. |
+| `skillsTags` | no | For case studies: the "Skills Demonstrated" pills at the end of the post. Add `"|"` as an item to start a new row of pills. |
+| `readingTime` | no | e.g. `"11 min read"`. Shown at the end of the byline under the title. |
 | `featured` | no | `true` puts the post in the home page "Featured Case Studies" block. The four newest featured posts (by `date`) show: the newest in the big slot, the next three stacked. |
 | `featuredRank` | no | No longer used. Safe to leave or delete. |
 
