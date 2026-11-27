@@ -137,7 +137,7 @@ I organized the newsletter into six sections that map to the objectives. The mos
 <div class="wf-sec end"><span class="wf-circle">6</span><p class="wf-st">Resource Spotlight</p><div class="mk-bar" style="--w:58%;margin-top:12px"></div><div class="mk-line"></div><div class="mk-line" style="--w:84%"></div><div class="mk-line" style="--w:56%"></div><div class="mk-btn"></div></div>
 </div>
 </div>
-<figcaption><span>How the six sections map to the newsletter’s objectives.</span><button class="replay" data-replay="wireframe" type="button">↻ Replay</button></figcaption>
+<figcaption><span>How the six sections map to the newsletter’s objectives.</span></figcaption>
 </figure>
 
 For the first two editions, in January and February, I was on my own, so I built the design in Mailchimp from scratch. In March, Jaime Clanachan joined Innovation UBC as their designer. Jaime has taken the design much further and continues to improve it with every edition.
@@ -242,7 +242,7 @@ I built a Content Intake project in Asana for this process, and we use it to ass
 </div>
 <svg aria-hidden="true" class="fan"></svg>
 </div>
-<figcaption><span>How a submission moves through the Content Intake project in Asana.</span><button class="replay" data-replay="intake" type="button">↻ Replay</button></figcaption>
+<figcaption><span>How a submission moves through the Content Intake project in Asana.</span></figcaption>
 </figure>
 
 ### Drafting collaboratively, with a Claude skill
@@ -397,7 +397,6 @@ Open rates trended up through the year, from 29.9% in January to 39.6% in Novemb
 <div class="trend" data-series="open"><div class="chart-head"><span class="t-label">Newsletter, 2026</span><span class="t-title">Open rate by month</span></div><div class="lc"></div></div>
 <div class="trend" data-series="click"><div class="chart-head"><span class="t-label">Newsletter, 2026</span><span class="t-title">Click rate by month</span></div><div class="lc"></div></div>
 </div>
-<figcaption class="replay-only"><button class="replay" data-replay="trends" type="button">↻ Replay</button></figcaption>
 </figure>
 
 ### Delivering on its objectives: the number one driver of event registrations
@@ -420,7 +419,6 @@ When I looked at Innovation UBC's latest 2026 event data, the newsletter was the
 <div class="axis"><span style="left:0">0%</span><span style="left:20%">10%</span><span style="left:40%">20%</span><span style="left:60%">30%</span><span style="left:80%">40%</span><span style="left:100%">50%</span></div>
 </div>
 </div>
-<figcaption class="replay-only"><button class="replay" data-replay="chart" type="button">↻ Replay</button></figcaption>
 </figure>
 
 The newsletter also delivers on the other objectives I set. It puts the month's top priority in front of every reader. The top story consistently draws over 100 clicks. In October, it got 140 clicks. In November, it got 254.
