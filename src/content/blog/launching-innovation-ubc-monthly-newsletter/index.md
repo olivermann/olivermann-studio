@@ -30,7 +30,7 @@ In January 2026, I launched Innovation UBC's monthly newsletter as one of my fir
 
 I also built several new processes to improve collaboration and production: a content intake system, a shared drafting workflow supported by a custom Claude skill, an analytics tracking system, and an Asana project to manage each edition from start to finish.
 
-The newsletter now goes out every month with a cohesive design. Compared to 2025, unique opens are up 16% and unique clicks are up 19%. It is the number one driver of event registrations, ahead of the website and social media combined. I also cut its cost by 51%.
+The newsletter now goes out every month with a cohesive design. Compared to 2025, unique opens are up 16% and unique clicks are up 19%. It is the number one driver of event registrations, ahead of the website and social media combined. I also cut its cost by over 50%.
 
 <div class="stats" data-anim="" id="stats">
 <div class="stat"><span class="stat-num" data-pre="+" data-suf="%" data-v="16">+16%</span><span class="stat-lab">unique opens per send, compared to 2025</span></div>
