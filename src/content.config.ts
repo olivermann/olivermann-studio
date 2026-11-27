@@ -29,6 +29,7 @@ const blog = defineCollection({
         types: z.array(z.enum(POST_TYPES)).nonempty(),
         draft: z.boolean().default(false),
         role: z.string().optional(), // speaking posts: "Moderator", "Speaker", etc.
+        readingTime: z.string().optional(), // e.g. "11 min read", shown at the end of the byline
         skillsTags: z.array(z.string()).default([]),
         heroImage: image().optional(),
         heroImageAlt: z.string().optional(),
